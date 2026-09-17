@@ -15,15 +15,26 @@
         let protocol = location.protocol === 'https:' ? 'wss:' : 'ws:'
         let url = `${protocol}//${location.host}/ws`
         let socket = new WebSocket(url)
+        // küsime kasutajalt nime üks kord, kui leht avaneb
+        let myName = prompt('Sisesta oma nimi vestluses:', 'Külaline') || 'Anonüümne';
+        let myMessage = ""
         // Vormilt sõnumi saatmine
         document.forms.publish.onsubmit = function() {
-            socket.send(this.message.value)
+            myMessage = { name: myName, time: new Date().toUTCString(), message: this.message.value }
+            socket.send(JSON.stringify(myMessage))
+            this.message.value = ""
             return false
         }
         // Saabunud sõnumite töötlemine
         socket.onmessage = function(event) {
             let messageElement = document.createElement("div")
-            messageElement.textContent = event.data
+            recievedMessage = JSON.parse(event.data)
+            if(recievedMessage.name === myMessage.name && recievedMessage.time === myMessage.time) {
+                messageElement.className = "myMessage"
+                messageElement.style.backgroundColor = "lightgray"
+                messageElement.style.textAlign = "right"
+            }
+            messageElement.textContent = `${recievedMessage.name}@${recievedMessage.time}: ${recievedMessage.message}`
             document.getElementById("messages").append(messageElement)
         }
         //Kui ühendus katkeb logime

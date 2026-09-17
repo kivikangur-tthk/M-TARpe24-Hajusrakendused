@@ -23,10 +23,10 @@ const clients = new Set()
 function onSocketConnect(ws) {
     clients.add(ws)
     ws.on("message", function (message) {
-        log(`Message`, message)
-        message = message.toString().slice(0, 50)
+        let packet = JSON.parse(message.toString())
+        packet = {...packet, message: packet.message.slice(0, 50)}
         for (const client of clients) {
-            client.send(message)
+            client.send(JSON.stringify(packet))
         }
     })
     ws.on("close", function() {
