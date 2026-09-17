@@ -1,0 +1,13 @@
+
+[
+    {
+        "title": {
+            "lang": "en",
+            "name": "Hearthstone"
+        },
+        "price": "Free",
+        "platforms": [
+            "PC","iOS"
+        ]
+    }
+]
