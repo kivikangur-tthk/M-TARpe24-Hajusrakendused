@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<arvutikomponendid>
+    <arvutikomponent>
+        <nimetus>Intel i9-380H</nimetus>
+        <tyyp>
+            <protsessor>
+                <tootja>Intel</tootja>
+                <mudel>i9-380H</mudel>
+                <taktisagedus>5.2</taktisagedus>
+            </protsessor>
+        </tyyp>
+        <hind>
+            <kogus>550</kogus>
+            <yhik>EUR</yhik>
+        </hind>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <emaplaat>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </emaplaat>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <mälu>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </mälu>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <videokaart>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </videokaart>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <salvestusseade>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </salvestusseade>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <toiteplokk>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </toiteplokk>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <korpus>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </korpus>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <klaviatuur>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </klaviatuur>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <hiir>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </hiir>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <monitor>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </monitor>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <kõrvaklapid>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </kõrvaklapid>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <mikrofon>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </mikrofon>
+        </tyyp>
+    </arvutikomponent>
+    <arvutikomponent>
+        <nimetus>Asus ROG P32-765h-SX wifi</nimetus>
+        <tyyp>
+            <veebikaamera>
+                <tootja>Asus</tootja>
+                <mudel>ROG P32-765h-SX wifi</mudel>
+                <protsessori-pesa>LGA2310</protsessori-pesa>
+            </veebikaamera>
+        </tyyp>
+    </arvutikomponent>
+</arvutikomponendid>
