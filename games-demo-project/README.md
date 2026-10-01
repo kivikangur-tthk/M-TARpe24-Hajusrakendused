@@ -4,6 +4,7 @@ Rakendus salvestab ja kuvab arvutimängude infot ja seda, kes kui palju mingit m
 
 ### Tegijad
 - Kristjan Kivikangur
+- Keegi tuleb ehk veel
 
 ### Arendaja keskkonna seadistamine ja projekti käivitamine
 
