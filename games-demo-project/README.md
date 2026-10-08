@@ -4,9 +4,11 @@ Rakendus salvestab ja kuvab arvutimängude infot ja seda, kes kui palju mingit m
 
 ### Tegijad
 - Kristjan Kivikangur
-- Keegi tuleb ehk veel
+- Jüri Vaitmaa
 
 Link to [project](https://github.com/users/Estlib/projects/5)
+
+<img width="1481" height="1323" alt="image" src="https://github.com/user-attachments/assets/c8c48bf5-c6bb-4e76-89e4-cbb0a4be1f32" />
 
 ### Arendaja keskkonna seadistamine ja projekti käivitamine
 
@@ -24,3 +26,4 @@ Lõpetamiseks käsureal klahvikombinatsioon: `CTRL+C`
 1. `backend` kaustas
 1. Konstrueeri produktsiooni kood käsuga: `npm run build`
 1. Käivita toodangu kood käsuga: `npm run start`
+

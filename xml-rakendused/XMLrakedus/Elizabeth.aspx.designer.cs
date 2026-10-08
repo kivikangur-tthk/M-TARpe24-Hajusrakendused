@@ -11,7 +11,7 @@ namespace XMLrakedus
 {
 
 
-    public partial class _Default
+    public partial class Elizabeth
     {
 
         /// <summary>
@@ -24,12 +24,21 @@ namespace XMLrakedus
         protected global::System.Web.UI.WebControls.Xml xml1;
 
         /// <summary>
-        /// xml2 control.
+        /// kast1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Xml xml2;
+        protected global::System.Web.UI.WebControls.TextBox kast1;
+
+        /// <summary>
+        /// kast2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox kast2;
     }
 }
