@@ -4,10 +4,12 @@ const app = express()
 app.use(express.json())
 const PORT = process.env.PORT || 3000
 
-const games = [
-    { id: 1, name: "Witcher 3", price: 5.55 },
-    { id: 2, name: "Minecraft", price: 35.55 },
-    { id: 3, name: "GTA 6", price: 999.55 },
+let nextGameId = 1
+const games: {id: number, name: string, price?:number|undefined }[] = [
+    { id: nextGameId++, name: "Witcher 3", price: 5.55 },
+    { id: nextGameId++, name: "Minecraft", price: 35.55 },
+    { id: nextGameId++, name: "GTA 6", price: 999.55 },
+    { id: nextGameId++, name: "Team Fortress 2" },
 ]
 
 
@@ -35,8 +37,29 @@ app.get("/games/:id",(req:Request, res: Response) => {
         res.status(404).send({error:"Game not found"})
         return
     }
-
     res.send(result)
+})
+
+app.post("/games", (req:Request, res:Response) => {
+    const name = req.body?.name as string
+    const price = req.body?.price !== undefined ? parseFloat(req.body.price) : undefined
+    if (!name) {
+        res.status(400).send({error: "Missing required parameter 'name'"})
+        return
+    }
+    if (Number.isNaN(price)) {
+        res.status(400).send({error: "Parameter 'price' must be a number"})
+        return        
+    }    
+    const newGame = {
+        id: nextGameId++,
+        name: name,
+        price: price
+    }
+    games.push(newGame)
+    res.status(201)
+        .location(`http://localhost:${PORT}/games/` + (newGame.id))
+        .send(newGame)
 })
 
 app.listen(PORT, () => {
