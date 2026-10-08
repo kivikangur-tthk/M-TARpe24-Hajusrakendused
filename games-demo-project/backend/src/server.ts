@@ -20,6 +20,25 @@ app.get("/games", (req:Request, res: Response) => {
     res.send(result)
 })
 
+app.get("/games/:id",(req:Request, res: Response) => {
+    if (!req.params.id) { // Could never happen
+        res.status(400).send({error: "ID required"})
+        return
+    }
+    const gameId = req.params.id ? 
+        typeof req.params.id === "string" ?
+            parseInt(req.params.id) 
+            : parseInt(req.params.id[0]!) 
+        : null
+    const result = games.filter(game => game.id === gameId)[0]
+    if (result === undefined) {
+        res.status(404).send({error:"Game not found"})
+        return
+    }
+
+    res.send(result)
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
 })
