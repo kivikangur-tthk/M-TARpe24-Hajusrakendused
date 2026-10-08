@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inimesed>
-<inimene>
-<eesnimi>Kristjan</eesnimi>
-<perenimi>Kivikangur</perenimi>
-<synd>1963</synd>
-</inimene>
-<inimene>
-<eesnimi>Kalle</eesnimi>
-<perenimi>Kaalikas</perenimi>
-<synd>1975</synd>
-</inimene>
-<inimene>
-<eesnimi>Märi</eesnimi>
-<perenimi>Maasikas</perenimi>
-<synd>1981</synd>
-</inimene>
-<inimene>
-<eesnimi>Oskar</eesnimi>
-<perenimi>Ohakas</perenimi>
-<synd>1971</synd>
-</inimene>
-<inimene>
-<eesnimi>Tiiu</eesnimi>
-<perenimi>Tomat</perenimi>
-<synd>2005</synd>
-</inimene>
+	<inimene>
+		<eesnimi>Kristjan</eesnimi>
+		<perenimi>Kivikangur</perenimi>
+		<synd>1963</synd>
+		<sugu>M</sugu>
+	</inimene>
+	<inimene>
+		<eesnimi>Kalle</eesnimi>
+		<perenimi>Kaalikas</perenimi>
+		<synd>1975</synd>
+		<sugu>M</sugu>
+	</inimene>
+	<inimene>
+		<eesnimi>Märi</eesnimi>
+		<perenimi>Maasikas</perenimi>
+		<synd>1981</synd>
+		<sugu>N</sugu>
+	</inimene>
+	<inimene>
+		<eesnimi>Oskar</eesnimi>
+		<perenimi>Ohakas</perenimi>
+		<synd>1971</synd>
+		<sugu>M</sugu>
+	</inimene>
+	<inimene>
+		<eesnimi>Tiiu</eesnimi>
+		<perenimi>Tomat</perenimi>
+		<synd>2005</synd>
+		<sugu>N</sugu>
+	</inimene>
 </inimesed>
