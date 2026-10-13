@@ -44,8 +44,8 @@ const GamesController = {
         )
     },
     async getByID(req: Request, res: Response) {
-        const gameID: string = req.params.Id
-        console.log(gameId)
+        let gameID: String = req.params.Id as String
+        console.log(gameID)
         const game = await db.games.findByPk(gameID);
         if (!game) {
             res.status(404).send({
@@ -54,6 +54,40 @@ const GamesController = {
             return null;
         }
         return game;
+    },
+    async modifyById(req: Request, res: Response) {
+        const gameToBeModified = await this.getByID(req, res)
+        if (!gameToBeModified) {
+            return;
+        }
+        if (
+            !req.body.GameName || 
+            !req.body.GameDescription ||
+            !req.body.ReleaseDate ||
+            !req.body.CategoryID ||
+            !req.body.ImageURL ||
+            !req.body.Reviews ||
+            !req.body.Comments
+        ) {
+            return res.status(400).send(
+                {
+                    error: "Missing parameters, please review data"
+                }
+            )
+        }
+        gameToBeModified.GameName = req.body.GameName
+        gameToBeModified.GameDescription = req.body.GameDescription
+        gameToBeModified.ReleaseDate = req.body.ReleaseDate
+        gameToBeModified.CategoryID = req.body.CategoryID
+        gameToBeModified.ImageURL = req.body.ImageURL
+        gameToBeModified.Reviews = req.body.Reviews
+        gameToBeModified.Comments = req.body.Comments
+
+        await gameToBeModified.save()
+
+        return res.location(`${Utilities.getBaseURL(req)}/games/${gameToBeModified.id}`)
+        .status(201)
+        .send(gameToBeModified)
     }
 }
 
