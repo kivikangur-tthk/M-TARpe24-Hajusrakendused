@@ -30,6 +30,18 @@ const GamesController = {
 
         return res
         .location(`${Utilities.getBaseURL(req)}/games/${createdGame.id}`).sendStatus(201);
+    },
+    async getAll(req: Request, res: Response) {
+        const games = await db.games.findAll();
+        console.log("getAll: "+games)
+        return res
+        .status(200)
+        .send(
+            games.map
+            (
+                ({Id, GameName}) => {return {Id, GameName}}
+            )
+        )
     }
 }
 
