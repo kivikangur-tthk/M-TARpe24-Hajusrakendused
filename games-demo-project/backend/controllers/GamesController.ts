@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { db } from "../db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
+import { error } from "node:console";
 
 const GamesController = {
     async create(req: Request, res: Response)  {
@@ -88,6 +89,16 @@ const GamesController = {
         return res.location(`${Utilities.getBaseURL(req)}/games/${gameToBeModified.id}`)
         .status(201)
         .send(gameToBeModified)
+    },
+    async deleteById(req: Request, res: Response) {
+        const gameToBeDeleted = await this.getByID(req, res)
+        if (!gameToBeDeleted) {
+            return;
+        }
+        await gameToBeDeleted.destroy();
+        return res.status(204)
+        .send({error: "No content."})
+
     }
 }
 
