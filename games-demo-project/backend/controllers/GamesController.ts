@@ -42,6 +42,18 @@ const GamesController = {
                 ({Id, GameName}) => {return {Id, GameName}}
             )
         )
+    },
+    async getByID(req: Request, res: Response) {
+        const gameID: string = req.params.Id
+        console.log(gameId)
+        const game = await db.games.findByPk(gameID);
+        if (!game) {
+            res.status(404).send({
+                error: `Game with this ID is not found. ${gameID}`
+            })
+            return null;
+        }
+        return game;
     }
 }
 
