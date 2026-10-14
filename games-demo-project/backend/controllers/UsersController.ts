@@ -26,7 +26,11 @@ const UsersController = {
             UserStatus: "unverified",
             PasswordHash: ""
         }
-        newUser.PasswordHash = Utilities.gimmePassword(req.body.Password)
+        newUser.PasswordHash = await Utilities.gimmePassword(req.body.Password)
+
+        const result = await db.users.create(newUser);
+
+        return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`).sendStatus(201);
 
     }
 }

@@ -2,6 +2,7 @@ import {Sequelize, DataTypes} from 'sequelize';
 
 //modelite pathid
 import GameModel from "../backend/models/Game.ts";
+import UserModel from "../backend/models/User.ts";
 
 //sequelizei andmebaasi ühendusanddmed
 const sequelize = new Sequelize(
@@ -30,7 +31,8 @@ const connect = async (): Promise<void> => {
 const db = {
     Sequelize, 
     sequelize,
-    games: require("../backend/models/Game.ts")(sequelize, DataTypes)
+    games: require("../backend/models/Game.ts")(sequelize, DataTypes),
+    users: require("../backend/models/User.ts")(sequelize, DataTypes)
 };
 
 //sünkroonmeetod
