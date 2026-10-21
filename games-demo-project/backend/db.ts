@@ -3,8 +3,9 @@ import {Sequelize, DataTypes} from 'sequelize';
 //modelite pathid
 import GameModel from "../backend/models/Game.ts";
 import UserModel from "../backend/models/User.ts";
+import UserCollectionModel from './models/UserCollection.ts';
 
-//sequelizei andmebaasi ühendusanddmed
+//sequelizei andmebaasi ühendusandmed 
 const sequelize = new Sequelize(
     process.env.DB_NAME!,
     process.env.DB_USERNAME!,
@@ -32,9 +33,16 @@ const db = {
     Sequelize, 
     sequelize,
     games: require("../backend/models/Game.ts")(sequelize, DataTypes),
-    users: require("../backend/models/User.ts")(sequelize, DataTypes)
+    users: require("../backend/models/User.ts")(sequelize, DataTypes),
+    userCollections: require("../backend/models/UserCollection.ts")(sequelize, DataTypes)
 };
+db.userCollections = require("../backend/models/UserCollection.ts")(sequelize, DataTypes, db.games, db.users)
+db.games.belongsToMany(db.users, {through: db.userCollections, as: "UserId"})
+db.users.belongsTo(db.games, {through: db.userCollections, as: "GameId"})
 
+db.users.HasMany(db.userCollections,{foreignKey: "UserId" as "GameId"})
+db.userCollections.belongsTo(db.users ,{foreignKey: "UserId" as "GameId"})
+db.games.
 //sünkroonmeetod
 const sync = async(): Promise<void> => {
     await sequelize.sync({alter:true})
