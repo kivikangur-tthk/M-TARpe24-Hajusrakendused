@@ -45,7 +45,7 @@ const GamesController = {
         )
     },
     async getByID(req: Request, res: Response) {
-        let gameID: String = req.params.Id as String
+        let gameID: String = req.params.id as String
         console.log(gameID)
         const game = await db.games.findByPk(gameID);
         if (!game) {
