@@ -8,7 +8,7 @@ Rakendus salvestab ja kuvab arvutimängude infot ja seda, kes kui palju mingit m
 
 Link to [project](https://github.com/users/Estlib/projects/5)
 
-<img width="1481" height="1323" alt="image" src="https://github.com/user-attachments/assets/c8c48bf5-c6bb-4e76-89e4-cbb0a4be1f32" />
+<img width="732" height="918" alt="image" src="https://github.com/user-attachments/assets/185ce863-9038-4de8-b6d7-6ebc9d91df3a" />
 
 ### Arendaja keskkonna seadistamine ja projekti käivitamine
 
