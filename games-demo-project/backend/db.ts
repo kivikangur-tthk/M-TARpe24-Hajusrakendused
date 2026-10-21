@@ -42,7 +42,8 @@ db.users.belongsTo(db.games, {through: db.userCollections, as: "GameId"})
 
 db.users.HasMany(db.userCollections,{foreignKey: "UserId" as "GameId"})
 db.userCollections.belongsTo(db.users ,{foreignKey: "UserId" as "GameId"})
-db.games.
+
+
 //sünkroonmeetod
 const sync = async(): Promise<void> => {
     await sequelize.sync({alter:true})

@@ -33,3 +33,4 @@ const UserCollectionsController = {
         return res.location(`${Utilities.getBaseURL(req)}/usercollections/${addedUserCollection.id}`).sendStatus(201)
     }
 }
+export default UserCollectionsController
