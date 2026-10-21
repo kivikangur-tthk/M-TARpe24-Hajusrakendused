@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
+import * as express from "express";
 import { db } from "../db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { error } from "node:console";
-import { UUID } from "node:crypto";
+import * as UUID from "node:crypto";
 
 const UserCollectionsController = {
-    async create(req: Request, res: Response) {
+    async create(req: express.Request, res: express.Response) {
         const userWhoUploaded = "userid"
         const gameIdToBeAddedToCollection = ["gameid"]
         //check if req body has a user id

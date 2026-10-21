@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import * as express from "express";
 import { db } from "../db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { error } from "node:console";
 
 const GamesController = {
-    async create(req: Request, res: Response)  {
+    async create(req: express.Request, res: express.Response)  {
         if (
             !req.body.GameName || 
             !req.body.GameDescription ||
@@ -32,7 +32,7 @@ const GamesController = {
         return res
         .location(`${Utilities.getBaseURL(req)}/games/${createdGame.id}`).sendStatus(201);
     },
-    async getAll(req: Request, res: Response) {
+    async getAll(req: express.Request, res: express.Response) {
         const games = await db.games.findAll();
         console.log("getAll: "+games)
         return res
@@ -44,7 +44,7 @@ const GamesController = {
             )
         )
     },
-    async getByID(req: Request, res: Response) {
+    async getByID(req: express.Request, res: express.Response) {
         let gameID: String = req.params.id as String
         console.log(gameID)
         const game = await db.games.findByPk(gameID);
@@ -56,7 +56,7 @@ const GamesController = {
         }
         return game;
     },
-    async modifyById(req: Request, res: Response) {
+    async modifyById(req: express.Request, res: express.Response) {
         const gameToBeModified = await this.getByID(req, res)
         if (!gameToBeModified) {
             return;
@@ -90,7 +90,7 @@ const GamesController = {
         .status(201)
         .send(gameToBeModified)
     },
-    async deleteById(req: Request, res: Response) {
+    async deleteById(req: express.Request, res: express.Response) {
         const gameToBeDeleted = await this.getByID(req, res)
         if (!gameToBeDeleted) {
             return;

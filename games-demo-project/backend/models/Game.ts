@@ -8,7 +8,8 @@ export default function GameModel(
     const Game = sequelize.define(
         "Game", {
             id: {
-                type: dataTypes.UUIDV4
+                type: dataTypes.UUIDV4,
+                primaryKey: true
             },
             GameName: {
                 type: dataTypes.STRING,

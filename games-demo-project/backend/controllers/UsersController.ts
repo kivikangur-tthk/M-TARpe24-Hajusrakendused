@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import * as express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { error } from "node:console";
 
 const UsersController = {
-    async create(req: Request, res: Response) {
+    async create(req: express.Request, res: express.Response) {
         if (!req.body.UserName || 
         !req.body.EmailAddress ||
         !req.body.Password ||

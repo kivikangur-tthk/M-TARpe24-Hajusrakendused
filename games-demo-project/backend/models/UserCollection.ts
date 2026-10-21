@@ -29,4 +29,6 @@ export default function UserCollectionModel(
             },
         }
     )
+    console.log(UserCollection === sequelize.models.UserCollection)
+    return UserCollection
 }

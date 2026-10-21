@@ -28,20 +28,22 @@ const connect = async (): Promise<void> => {
         console.error("db connection error", error)
     }
 }
+const _Game = GameModel(sequelize, DataTypes)
+const _User = UserModel(sequelize, DataTypes)
+const _UserCollection = UserCollectionModel(sequelize, DataTypes)
 //andmebaasi instants ja seostused
+_User.hasMany(_UserCollection,{foreignKey: "UserId" as "UserCollection"})
+_UserCollection.belongsTo(_User ,{foreignKey: "UserId" as "User"})
 const db = {
     Sequelize, 
     sequelize,
-    games: require("../backend/models/Game.ts")(sequelize, DataTypes),
-    users: require("../backend/models/User.ts")(sequelize, DataTypes),
-    userCollections: require("../backend/models/UserCollection.ts")(sequelize, DataTypes)
+    games: _Game,
+    users: _User,
+    userCollections: _UserCollection
 };
-db.userCollections = require("../backend/models/UserCollection.ts")(sequelize, DataTypes, db.games, db.users)
-db.games.belongsToMany(db.users, {through: db.userCollections, as: "UserId"})
-db.users.belongsTo(db.games, {through: db.userCollections, as: "GameId"})
+// db.games.belongsToMany(db.users, {through: db.userCollections, as: "UserId"})
+// db.users.belongsTo(db.games, {through: db.userCollections, as: "GameId"})
 
-db.users.HasMany(db.userCollections,{foreignKey: "UserId" as "GameId"})
-db.userCollections.belongsTo(db.users ,{foreignKey: "UserId" as "GameId"})
 
 
 //sünkroonmeetod
