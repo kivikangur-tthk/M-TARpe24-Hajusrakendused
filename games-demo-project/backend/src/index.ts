@@ -1,13 +1,11 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { sync } from "../db.ts"
 
 import appRoutes from "../routes/appRoutes.ts";
 
-dotenv.config()
-
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 const host = "localhost";
 
 const app = express();
