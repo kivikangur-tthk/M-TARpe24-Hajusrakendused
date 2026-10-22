@@ -12,10 +12,10 @@ export class Game extends Model<InferAttributes<Game>,InferCreationAttributes<Ga
 
     //canhave
     declare id: CreationOptional<string>
-    declare ImageURL: CreationOptional<string>
+    declare ImageURL: CreationOptional<string | null>
     declare IsOwnedBy: CreationOptional<number>
-    declare Reviews: CreationOptional<Json>
-    declare Comments: CreationOptional<Json>
+    declare Reviews: CreationOptional<Json | null>
+    declare Comments: CreationOptional<Json | null>
 
     //dbhave
     declare createdAt: CreationOptional<Date>;

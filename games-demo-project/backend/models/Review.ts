@@ -12,7 +12,7 @@ export class Review extends Model<InferAttributes<Review>,InferCreationAttribute
 
     //canhave
     declare id: CreationOptional<string>
-    declare ReviewCommentsId: CreationOptional<string>
+    declare ReviewCommentsId: CreationOptional<string | null>
     declare ReviewStatus: CreationOptional<string>
 
     //dbhas

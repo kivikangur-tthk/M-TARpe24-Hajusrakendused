@@ -11,8 +11,8 @@ InferCreationAttributes<UserCollection>> {
     declare UserID: string
 
     //canhave
-    declare id: CreationOptional<string>
-    declare CollectionDescription: CreationOptional<string>
+    declare id: CreationOptional<string | null>
+    declare CollectionDescription: CreationOptional<string | null>
 
     //dbhave
     declare createdAt: CreationOptional<Date>;
