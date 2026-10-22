@@ -2,7 +2,6 @@ import * as express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
-import { error } from "node:console";
 
 const UsersController = {
     async create(req: express.Request, res: express.Response) {
@@ -18,17 +17,16 @@ const UsersController = {
             return res.status(406)
             .send({error:"Passwords do not match, please check your info."})            
         }
-        const newUser = {
+
+        const passwordHash = await Utilities.gimmePassword(req.body.Password)
+
+        const result = await db.users.create({
             id: uuidv7(),
             UserName: req.body.UserName,
             EmailAddress: req.body.EmailAddress,
-            SignupDate: Date.now,
             UserStatus: "unverified",
-            PasswordHash: ""
-        }
-        newUser.PasswordHash = await Utilities.gimmePassword(req.body.Password)
-
-        const result = await db.users.create(newUser);
+            PasswordHash: passwordHash
+        });
 
         return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`).sendStatus(201);
 

@@ -1,4 +1,4 @@
-import {Sequelize, DataTypes} from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 
 //modelite pathid
 import GameModel from "../backend/models/Game.ts";
@@ -19,17 +19,17 @@ const sequelize = new Sequelize(
 
 //ühendusmeetod
 const connect = async (): Promise<void> => {
-    try {
+        try {
         await sequelize.authenticate();
         console.log("Connection established.");
     }
     catch (error)
     {
-        console.error("db connection error", error)
+        console.log("db connection error", error)
     }
 }
 const _Game = GameModel(sequelize, DataTypes)
-const _User = UserModel(sequelize, DataTypes)
+const _User = UserModel(sequelize)
 const _UserCollection = UserCollectionModel(sequelize, DataTypes)
 //andmebaasi instants ja seostused
 _User.hasMany(_UserCollection,{foreignKey: "UserId" as "UserCollection"})
