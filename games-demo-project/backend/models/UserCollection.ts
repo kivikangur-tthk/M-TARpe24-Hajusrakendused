@@ -1,34 +1,59 @@
-import { Sequelize, DataTypes } from "sequelize";
+import type { UUID } from "node:crypto";
+import { DataTypes, Model, UUIDV4 } from "sequelize";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "sequelize";
+import type { Json } from "sequelize/lib/utils";
 
-export default function UserCollectionModel(
-    sequelize: Sequelize,
-    dataTypes: typeof DataTypes
+export class UserCollection extends Model<InferAttributes<UserCollection>,
+InferCreationAttributes<UserCollection>> {
+    //musthave
+    declare CollectionName: string
+    declare GameIDs: Json
+    declare UserID: string
+
+    //canhave
+    declare id: CreationOptional<string>
+    declare CollectionDescription: CreationOptional<string>
+
+    //dbhave
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
+}
+
+export default function initUserCollectionModel(
+    sequelize: Sequelize
 ) {
-    const UserCollection = sequelize.define(
-        "UserCollection", {
+    UserCollection.init(
+        {
             id: {
-                type: dataTypes.UUIDV4,
+                type: DataTypes.UUID,
+                defaultValue: UUIDV4,
                 primaryKey: true
             },
             CollectionName: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             CollectionDescription: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: true,
             },
             // võõrvõtmed
-            GameId: {
-                type: dataTypes.ARRAY(dataTypes.UUID),
+            GameIDs: {
+                type: DataTypes.JSON,
                 allowNull: false
             },
-            UserId: {
-                type: dataTypes.UUID,
+            UserID: {
+                type: DataTypes.STRING,
                 allowNull: false
             },
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
+        },
+        {
+            sequelize,
+            modelName: "UserCollection",
         }
     )
-    console.log(UserCollection === sequelize.models.UserCollection)
+    
     return UserCollection
 }
