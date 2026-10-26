@@ -28,9 +28,9 @@ const connect = async (): Promise<void> => {
         console.log("db connection error", error)
     }
 }
-const _Game = GameModel(sequelize, DataTypes)
+const _Game = GameModel(sequelize)
 const _User = UserModel(sequelize)
-const _UserCollection = UserCollectionModel(sequelize, DataTypes)
+const _UserCollection = UserCollectionModel(sequelize)
 //andmebaasi instants ja seostused
 _User.hasMany(_UserCollection,{foreignKey: "UserId" as "UserCollection"})
 _UserCollection.belongsTo(_User ,{foreignKey: "UserId" as "User"})

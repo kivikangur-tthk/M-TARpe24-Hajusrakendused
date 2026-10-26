@@ -20,7 +20,6 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
-
 export default function initUserModel(sequelize: Sequelize) {
   User.init(
     {

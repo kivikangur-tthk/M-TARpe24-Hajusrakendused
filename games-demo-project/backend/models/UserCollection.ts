@@ -8,7 +8,7 @@ InferCreationAttributes<UserCollection>> {
     //musthave
     declare CollectionName: string
     declare GameIDs: Json
-    declare UserID: string
+    declare UserId: string
 
     //canhave
     declare id: CreationOptional<string | null>
@@ -42,8 +42,8 @@ export default function initUserCollectionModel(
                 type: DataTypes.JSON,
                 allowNull: false
             },
-            UserID: {
-                type: DataTypes.STRING,
+            UserId: {
+                type: DataTypes.UUID,
                 allowNull: false
             },
             createdAt: DataTypes.DATE,
