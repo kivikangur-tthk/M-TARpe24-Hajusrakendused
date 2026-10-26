@@ -7,8 +7,8 @@ import * as UUID from "node:crypto";
 
 const UserCollectionsController = {
     async create(req: express.Request, res: express.Response) {
-        const userWhoUploaded = "userid"
-        const gameIdToBeAddedToCollection = ["gameid"]
+        const userWhoUploaded = uuidv7()
+        const gameIdToBeAddedToCollection = JSON.parse(["a","b"].join(","))
         //check if req body has a user id
         //if not, use status 403
         //else, add into object to be created
@@ -26,7 +26,7 @@ const UserCollectionsController = {
             CollectionName: req.body.CollectionName,
             CollectionDescription: req.body.CollectionDescription,
             UserId: userWhoUploaded, //later get real userid
-            GameId: gameIdToBeAddedToCollection //later get real gameidarray
+            GameIDs: gameIdToBeAddedToCollection //later get real gameidarray
         }
         const addedUserCollection = await db.userCollections.create(newUserCollection)
 
