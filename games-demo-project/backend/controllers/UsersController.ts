@@ -2,6 +2,7 @@ import * as express from "express";
 import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
+import type { User } from "../models/User.ts"
 
 const UsersController = {
     async create(req: express.Request, res: express.Response) {
@@ -30,6 +31,13 @@ const UsersController = {
 
         return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`).sendStatus(201);
 
+    },
+    async getAll(req: express.Request, res: express.Response) {
+        const users = await db.users.findAll();
+        console.log("getAll"+users)
+        return res.status(200).send(users.map(
+            ({id, UserName, UserStatus, EmailAddress }) => {return {id, UserName, UserStatus, EmailAddress}}
+        ))
     }
 }
 export default UsersController

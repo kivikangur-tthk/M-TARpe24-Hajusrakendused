@@ -12,7 +12,7 @@ export default (app: express.Application): void => {
         .put(GamesController.modifyById)
         .delete(GamesController.deleteById)
     app.route("/users")
-        //.get(UsersController.getAll)
+        .get(UsersController.getAll)
         .post(UsersController.create)
     app.route("/users/:id")
         //.get(UsersController.getById)
