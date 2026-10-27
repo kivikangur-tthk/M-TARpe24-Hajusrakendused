@@ -40,21 +40,23 @@ const GamesController = {
         .send(
             games.map
             (
-                ({Id, GameName}) => {return {Id, GameName}}
+                ({id, GameName}) => {return {id, GameName}}
             )
         )
     },
     async getByID(req: express.Request, res: express.Response) {
-        let gameID: String = req.params.id as String
+        let gameID: string = req.params.id as string
         console.log(gameID)
         const game = await db.games.findByPk(gameID);
         if (!game) {
+            console.log("Game not found")
             res.status(404).send({
                 error: `Game with this ID is not found. ${gameID}`
             })
             return null;
         }
-        return game;
+        console.log("Game is found")
+        return res.status(200).send(game);
     },
     async modifyById(req: express.Request, res: express.Response) {
         const gameToBeModified = await this.getByID(req, res)
