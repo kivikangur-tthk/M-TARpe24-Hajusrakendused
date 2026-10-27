@@ -1,9 +1,9 @@
-import * as express from "express"
+import type express from "express"
 import GamesController from "../controllers/GamesController.ts"
 import UsersController from "../controllers/UsersController.ts"
 import UserCollectionController from "../controllers/UserCollectionsController.ts"
 
-export default (app: express.Express): void => {
+export default (app: express.Application): void => {
     app.route("/games")
         .get(GamesController.getAll)
         .post(GamesController.create)
@@ -21,5 +21,4 @@ export default (app: express.Express): void => {
     app.route("/usercollections/")
         //get all
         .post(UserCollectionController.create)
-        
 }
