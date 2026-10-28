@@ -2,6 +2,7 @@ import type express from "express"
 import GamesController from "../controllers/GamesController.ts"
 import UsersController from "../controllers/UsersController.ts"
 import UserCollectionsController from "../controllers/UserCollectionsController.ts"
+import CategoriesController from "../controllers/CategoriesController.ts"
 
 export default (app: express.Application): void => {
     app.route("/games")
@@ -25,4 +26,11 @@ export default (app: express.Application): void => {
         .get(UserCollectionsController.getById)
         .put(UserCollectionsController.modifyById)
         .delete(UserCollectionsController.deleteById)
+    app.route("/categories/")
+        //.get(UserCollectionsController.getAll)
+        .post(UserCollectionsController.create)
+    app.route("/categories/:id")
+        //.get(UserCollectionsController.getById)
+        //.put(UserCollectionsController.modifyById)
+        //.delete(UserCollectionsController.deleteById)
 }
