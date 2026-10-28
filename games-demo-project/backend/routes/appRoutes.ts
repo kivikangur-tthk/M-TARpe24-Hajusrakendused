@@ -23,6 +23,6 @@ export default (app: express.Application): void => {
         .post(UserCollectionsController.create)
     app.route("/usercollections/:id")
         .get(UserCollectionsController.getById)
-        //.put(UserCollectionController.modifyById)
+        .put(UserCollectionsController.modifyById)
         //.delete(UserCollectionController.deleteById)
 }

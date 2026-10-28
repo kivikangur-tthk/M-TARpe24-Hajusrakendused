@@ -5,6 +5,7 @@ import { v7 as uuidv7 } from "uuid";
 import { error } from "node:console";
 import * as UUID from "node:crypto";
 import { DATE } from "sequelize";
+import type { UserCollection } from "../models/UserCollection.ts";
 
 const UserCollectionsController = {
     async create(req: express.Request, res: express.Response) {
@@ -59,6 +60,39 @@ const UserCollectionsController = {
             return            
         }
         return res.status(200).send(userCollection);
+    },
+    async modifyById(req: express.Request, res: express.Response) {
+        if (!req.params.id) {
+            console.log(req.params.id)
+            return res.status(400).send({"error":"No id supplied"})
+        }
+        if (!req.body) {
+            return res.status(400).send({"error":"No body was supplied, nothing was changed"})
+        }
+
+        const userCollectionToBeModified = await UserCollectionsController.getUserCollection(req, res)
+
+        if (!userCollectionToBeModified) {
+            return res.status(404).send({"error":"UserCollection not found with id "+req.params.id});
+        }
+
+        //eeldame et vaade annab vanad andmed ka kaasa
+        const modifiedUserCollection = {
+            CollectionName: req.body.CollectionName,
+            CollectionDescription: req.body.CollectionDescription,
+            GameIDs: req.body.GameIDs,
+            UserId: req.body.UserId,
+            createdAt: req.body.createdAt,
+        } as UserCollection
+        modifiedUserCollection.updatedAt = new Date()
+
+        await db.userCollections.update(modifiedUserCollection, {
+            where:{
+                id: req.params.id
+            }
+        })
+        return res.location(`${Utilities.getBaseURL(req)}/usercollections/${userCollectionToBeModified}`).status(201).send(modifiedUserCollection)
+
     },
     async getUserCollection(req: express.Request, res: express.Response) {
         let userCollectionID: string = req.params.id as string

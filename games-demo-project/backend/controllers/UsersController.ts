@@ -71,7 +71,6 @@ const UsersController = {
             ProfileID: req.body.ProfileID,
             CredentialID: req.body.CredentialID,
             createdAt: req.body.createdAt,
-
         }
 
         //TODO: add if ladder for checking new data in comparison with existing one.
