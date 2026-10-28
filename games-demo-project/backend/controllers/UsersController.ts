@@ -50,10 +50,14 @@ const UsersController = {
         if (!req.params.id) {
             return res.status(400).send({"error":"No id supplied"})
         }
+        console.log("++++++ id is"+req.params.id)
         const userToBeModified = await UsersController.getUser(req, res) as User
+        console.log("++++++ user is"+userToBeModified)
         if (!req.body) {
             return res.status(400).send({"error":"No body was supplied, nothing was changed"})
         }
+
+        console.log("++++++ body: "+req.body)
         const modifiedUser = new User
 
         modifiedUser.UserName = userToBeModified.UserName
@@ -95,18 +99,21 @@ const UsersController = {
             modifiedUser.ProfileID = req.body.ProfileID
         }
         if (req.body.EmailAddress) {
+
+            console.log("++++++ found email is")
             modifiedUser.EmailAddress = req.body.EmailAddress
         }
         if (req.body.CredentialID) {
             modifiedUser.CredentialID = req.body.CredentialID
         }
         modifiedUser.updatedAt = new Date()
+        console.log("++++++ modifieduser is: "+modifiedUser)
         await db.users.update(modifiedUser, {
             where: {
                 id: req.params.id
             }
         })
-        return res.location(`${Utilities.getBaseURL(req)}/users/${req.params.id}`).status(201).send(modifiedUser)
+        return res.location(`${Utilities.getBaseURL(req)}/users/${userToBeModified}`).status(201).send(modifiedUser)
     },
     async getUser(req: express.Request, res: express.Response) {
         let userID: string = req.params.id as string
