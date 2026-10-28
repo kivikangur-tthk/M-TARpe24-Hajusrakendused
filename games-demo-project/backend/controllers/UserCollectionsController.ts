@@ -8,26 +8,29 @@ import { DATE } from "sequelize";
 
 const UserCollectionsController = {
     async create(req: express.Request, res: express.Response) {
-        const userWhoUploaded = "9f6a98e7-d13d-11f1-8dc2-901b0eec5991"
         //check if req body has a user id
         //if not, use status 403
         //else, add into object to be created
         if (!req.body.CollectionName 
-            || !req.body.GameId
+            || !req.body.GameIDs
+            || !req.body.UserId
         ) {
+            if (!req.body.UserId) {
+                return res.status(403).send({error:"No user id specified, you must be logged in."})
+            }
             return res.status(400).send(
                 {
                     error: "Missing parameters, please review data"
                 }
             )
         }
-        const starterJson = `{"GameIDs":"${req.body.GameId}"}`
+        const starterJson = `{"GameIDs":"${req.body.GameIDs}"}`
         const gameIdToBeAddedToCollection = JSON.parse(starterJson)
         const newUserCollection = {
             id: uuidv7(),
             CollectionName: req.body.CollectionName,
             CollectionDescription: req.body.CollectionDescription,
-            UserId: userWhoUploaded, //later get real userid
+            UserId: req.body.UserId, //later get real userid
             GameIDs: gameIdToBeAddedToCollection, //later get real gameidarray
             createdAt: new Date(),
             updatedAt: new Date()
