@@ -59,22 +59,23 @@ const UsersController = {
         }
 
         console.log("++++++ body: "+req.body)
-        const modifiedUser = new User()
+        
+        const modifiedUser = {
+            UserName: req.body.UserName,
+            PasswordHash: req.body.PasswordHash,
+            EmailAddress: req.body.EmailAddress,
+            SignupDate: req.body.SignupDate,
+            UserStatus: req.body.UserStatus,
+            UserCollectionID: req.body.UserCollectionID,
+            ReviewListID: req.body.ReviewListID,
+            ProfileID: req.body.ProfileID,
+            CredentialID: req.body.CredentialID,
+            createdAt: req.body.createdAt,
 
-        modifiedUser.UserName = userToBeModified.UserName
-        modifiedUser.PasswordHash = userToBeModified.PasswordHash
-        modifiedUser.SignupDate = userToBeModified.SignupDate
-        modifiedUser.UserStatus = userToBeModified.UserStatus
-        modifiedUser.EmailAddress = userToBeModified.EmailAddress
-        modifiedUser.UserCollectionID = userToBeModified.UserCollectionID
-        modifiedUser.ReviewListID = userToBeModified.ReviewListID
-        modifiedUser.ProfileID = userToBeModified.ProfileID
-        modifiedUser.CredentialID = userToBeModified.CredentialID
-        modifiedUser.createdAt = userToBeModified.createdAt
-
-        if (req.body.UserName) {
-            modifiedUser.UserName = req.body.UserName
         }
+
+        //TODO: add if ladder for checking new data in comparison with existing one.
+        
         if (req.body.Password) {
             //kontrolli olemasoleva paswordi hashide samasust
             if (req.body.Password != req.body.PasswordConfirmation) 
@@ -83,32 +84,14 @@ const UsersController = {
             .send({error:"Passwords do not match, please check your info."})            
             } else {
                 const passwordHash = await Utilities.gimmePassword(req.body.Password)
+                modifiedUser.PasswordHash = passwordHash
             }
             //kui ok, siis proceed
             //hashi uus password
-        }
-        if (req.body.UserStatus) {
-            modifiedUser.UserStatus = req.body.UserStatus
-        }
-        if (req.body.UserCollectionID) {
-            modifiedUser.UserCollectionID = req.body.UserCollectionID
-        }
-        if (req.body.ReviewListID) {
-            modifiedUser.ReviewListID = req.body.ReviewListID
-        }
-        if (req.body.ProfileID) {
-            modifiedUser.ProfileID = req.body.ProfileID
-        }
-        if (req.body.EmailAddress) {
+        }        
+        userToBeModified.updatedAt = new Date()
 
-            console.log("++++++ found email is")
-            modifiedUser.EmailAddress = req.body.EmailAddress
-        }
-        if (req.body.CredentialID) {
-            modifiedUser.CredentialID = req.body.CredentialID
-        }
-        modifiedUser.updatedAt = new Date()
-        console.log("++++++ modifieduser is: "+modifiedUser)
+        console.log("++++++ modifieduser is: "+userToBeModified)
         await db.users.update(modifiedUser, {
             where: {
                 id: req.params.id
