@@ -46,6 +46,7 @@ const UsersController = {
         }
         return res.status(200).send(user)
     },
+    async 
     async getUser(req: express.Request, res: express.Response) {
         let userID: string = req.params.id as string
         //console.log(userID)
