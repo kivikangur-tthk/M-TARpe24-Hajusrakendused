@@ -19,6 +19,7 @@
     // and npm install -D @types/node
 
     // Other Outputs
+    // kui allowImportingTsExtentions on erroris siis "noEmit": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
