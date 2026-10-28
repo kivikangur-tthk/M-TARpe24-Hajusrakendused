@@ -50,22 +50,40 @@ const UsersController = {
         if (!req.params.id) {
             return res.status(400).send({"error":"No id supplied"})
         }
-        const userToBeModified = await UsersController.getUser(req, res)
+        const userToBeModified = await UsersController.getUser(req, res) as User
         if (!req.body) {
             return res.status(400).send({"error":"No body was supplied, nothing was changed"})
         }
         const modifiedUser = new User
+
+        modifiedUser.UserName = userToBeModified.UserName
+        modifiedUser.PasswordHash = userToBeModified.PasswordHash
+        modifiedUser.SignupDate = userToBeModified.SignupDate
+        modifiedUser.UserStatus = userToBeModified.UserStatus
+        modifiedUser.EmailAddress = userToBeModified.EmailAddress
+        modifiedUser.UserCollectionID = userToBeModified.UserCollectionID
+        modifiedUser.ReviewListID = userToBeModified.ReviewListID
+        modifiedUser.ProfileID = userToBeModified.ProfileID
+        modifiedUser.CredentialID = userToBeModified.CredentialID
+        modifiedUser.createdAt = userToBeModified.createdAt
+
         if (req.body.UserName) {
             modifiedUser.UserName = req.body.UserName
         }
-        if (req.body.PasswordHash) {
-            modifiedUser.PasswordHash = req.body.PasswordHash
+        if (req.body.Password) {
+            //kontrolli olemasoleva paswordi hashide samasust
+            if (req.body.Password != req.body.PasswordConfirmation) 
+            {
+            return res.status(406)
+            .send({error:"Passwords do not match, please check your info."})            
+            } else {
+                const passwordHash = await Utilities.gimmePassword(req.body.Password)
+            }
+            //kui ok, siis proceed
+            //hashi uus password
         }
         if (req.body.UserStatus) {
             modifiedUser.UserStatus = req.body.UserStatus
-        }
-        if (req.body.UserCollectionID) {
-            modifiedUser.UserCollectionID = req.body.UserCollectionID
         }
         if (req.body.UserCollectionID) {
             modifiedUser.UserCollectionID = req.body.UserCollectionID
@@ -88,7 +106,7 @@ const UsersController = {
                 id: req.params.id
             }
         })
-        return res.location(`${Utilities.getBaseURL(req)}/users/${modifiedUser}`).status(201).send(modifiedUser)
+        return res.location(`${Utilities.getBaseURL(req)}/users/${req.params.id}`).status(201).send(modifiedUser)
     },
     async getUser(req: express.Request, res: express.Response) {
         let userID: string = req.params.id as string
