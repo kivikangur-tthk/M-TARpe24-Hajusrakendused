@@ -58,7 +58,7 @@ const UsersController = {
         }
 
         console.log("++++++ body: "+req.body)
-        const modifiedUser = new User
+        const modifiedUser = new User()
 
         modifiedUser.UserName = userToBeModified.UserName
         modifiedUser.PasswordHash = userToBeModified.PasswordHash
