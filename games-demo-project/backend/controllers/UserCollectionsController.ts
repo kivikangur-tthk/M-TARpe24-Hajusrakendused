@@ -94,6 +94,14 @@ const UserCollectionsController = {
         return res.location(`${Utilities.getBaseURL(req)}/usercollections/${userCollectionToBeModified}`).status(201).send(modifiedUserCollection)
 
     },
+    async deleteById(req: express.Request, res: express.Response) {
+        const userCollectionToBeDeleted = await UserCollectionsController.getUserCollection(req, res)
+        if (!userCollectionToBeDeleted) {
+            return
+        }
+        await userCollectionToBeDeleted.destroy();
+        return res.status(204).send({"error":"No Content"})
+    },
     async getUserCollection(req: express.Request, res: express.Response) {
         let userCollectionID: string = req.params.id as string
         const userCollection = await db.userCollections.findByPk(userCollectionID)

@@ -24,5 +24,5 @@ export default (app: express.Application): void => {
     app.route("/usercollections/:id")
         .get(UserCollectionsController.getById)
         .put(UserCollectionsController.modifyById)
-        //.delete(UserCollectionController.deleteById)
+        .delete(UserCollectionsController.deleteById)
 }
