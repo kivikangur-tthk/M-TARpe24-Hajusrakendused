@@ -11,6 +11,12 @@ const UserCollectionsController = {
         //check if req body has a user id
         //if not, use status 403
         //else, add into object to be created
+        /*test with this data, should create:
+        {
+    "UserId": "9f6a98e7-d13d-11f1-8dc2-901b0eec5991",
+    "GameIDs": "ä,ö,ü",
+    "CollectionName":"fresh games off the slopstack"
+}*/
         if (!req.body.CollectionName 
             || !req.body.GameIDs
             || !req.body.UserId
