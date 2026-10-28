@@ -35,6 +35,14 @@ const UserCollectionsController = {
         const addedUserCollection = await db.userCollections.create(newUserCollection)
 
         return res.location(`${Utilities.getBaseURL(req)}/usercollections/${addedUserCollection.id}`).sendStatus(201)
-    }
+    },
+    async getAll(req: express.Request, res: express.Response) {
+        const userCollections = await db.userCollections.findAll();
+        return res.status(200).send(userCollections.map(
+            ({id,CollectionName}) => {return {id, CollectionName}}
+        ))
+    },
+    // async getAllByUser(req: express.Request, res: express.Response) {
+    // },
 }
 export default UserCollectionsController
