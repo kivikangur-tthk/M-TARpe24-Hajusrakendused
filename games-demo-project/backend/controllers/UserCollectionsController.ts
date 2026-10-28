@@ -44,5 +44,21 @@ const UserCollectionsController = {
     },
     // async getAllByUser(req: express.Request, res: express.Response) {
     // },
+    async getById(req: express.Request, res: express.Response) {
+        const userCollection = await UserCollectionsController.getUserCollection(req, res)
+        if (!userCollection) {
+            return            
+        }
+        return res.status(200).send(userCollection);
+    },
+    async getUserCollection(req: express.Request, res: express.Response) {
+        let userCollectionID: string = req.params.id as string
+        const userCollection = await db.userCollections.findByPk(userCollectionID)
+        if (!userCollection) {
+            res.status(404).send({error:"UserCollection with this id is not found: "+userCollectionID})
+            return null;
+        }
+        return userCollection
+    }
 }
 export default UserCollectionsController
