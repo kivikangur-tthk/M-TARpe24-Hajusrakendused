@@ -3,6 +3,7 @@ import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { User } from "../models/User.ts"
+import GamesController from "./GamesController.ts";
 
 const UsersController = {
     async create(req: express.Request, res: express.Response) {
@@ -114,6 +115,14 @@ const UsersController = {
             }
         })
         return res.location(`${Utilities.getBaseURL(req)}/users/${userToBeModified}`).status(201).send(modifiedUser)
+    },
+    async deleteById(req: express.Request, res: express.Response) {
+        const userToBeDeleted = await UsersController.getUser(req, res)
+        if (!userToBeDeleted) {
+            return            
+        }
+        await userToBeDeleted.destroy();
+        return res.status(204).send({error :"No Content"})
     },
     async getUser(req: express.Request, res: express.Response) {
         let userID: string = req.params.id as string
