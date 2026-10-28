@@ -15,7 +15,7 @@ export default (app: express.Application): void => {
         .get(UsersController.getAll)
         .post(UsersController.create)
     app.route("/users/:id")
-        //.get(UsersController.getById)
+        .get(UsersController.getById)
         //.put(UsersController.updateById)
         //.delete(UsersController.deleteById)
     app.route("/usercollections/")
