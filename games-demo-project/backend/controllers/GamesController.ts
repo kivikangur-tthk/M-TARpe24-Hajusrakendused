@@ -58,7 +58,7 @@ const GamesController = {
 
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
-                const requiredFields = ['GameName', 'GameDescription', 'ReleaseDate', 'CategoryID'];
+        const requiredFields = ['GameName', 'GameDescription', 'ReleaseDate', 'CategoryID'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
 
         if (missingFields.length > 0) {

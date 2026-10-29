@@ -9,12 +9,15 @@ const UsersController = {
 
     //update for standards
     async create(req: express.Request, res: express.Response) {
-        if (!req.body.UserName || 
-        !req.body.EmailAddress ||
-        !req.body.Password ||
-        !req.body.PasswordConfirmation) {
-            return res.status(400)
-            .send({error:"Missing parameters, please check your info."})
+
+        const requiredFields = ['UserName', 'EmailAddress', 'Password', 'PasswordConfirmation'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
         }
         if (req.body.Password != req.body.PasswordConfirmation) 
             {
@@ -52,6 +55,16 @@ const UsersController = {
 
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
+
+        const requiredFields = ['UserName', 'EmailAddress', 'Password', 'PasswordConfirmation'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
+        }
+
         if (!req.params.id) {
             return res.status(400).send({"error":"No id supplied"})
         }
@@ -78,6 +91,7 @@ const UsersController = {
         }
 
         //TODO: add if ladder for checking new data in comparison with existing one.
+        //not doing the todo rn, jv2910'26
         
         if (req.body.Password) {
             //kontrolli olemasoleva paswordi hashide samasust
