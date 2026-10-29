@@ -62,6 +62,12 @@ const CategoriesController = {
         .status(201)
         .send(modifiedCategory)
     },
+    async deleteById (req: express.Request, res: express.Response) {
+        const categoryToBeDeleted = await CategoriesController.getCategory(req, res)
+        if (!categoryToBeDeleted) {return}
+        await categoryToBeDeleted.destroy();
+        return res.status(204).send({error: "No Content"})
+    },
     async getCategory(req: express.Request, res: express.Response) {
         let categoryID: string = req.params.id as string
         const category = await db.categories.findByPk(categoryID);
