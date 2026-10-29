@@ -1,8 +1,12 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
+//eekspres
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     // File Layout
-    "rootDir": "./src",
+    "rootDir": "../backend",
     "outDir": "./dist",
 
     // Environment Settings
@@ -15,6 +19,7 @@
     // and npm install -D @types/node
 
     // Other Outputs
+    // kui allowImportingTsExtentions on erroris siis "noEmit": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -43,6 +48,5 @@
     "skipLibCheck": true,
   },
   "include": ["src/**/*"],
-  "include": ["../d"],
   "exclude": ["node_modules"]
 }

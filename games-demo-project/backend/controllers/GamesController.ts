@@ -1,11 +1,12 @@
-import { Request, Response } from "express";
+import * as express from "express";
 import { db } from "../db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { error } from "node:console";
+import type { Game } from "../models/Game.ts";
 
 const GamesController = {
-    async create(req: Request, res: Response)  {
+    async create(req: express.Request, res: express.Response)  {
         if (
             !req.body.GameName || 
             !req.body.GameDescription ||
@@ -32,7 +33,7 @@ const GamesController = {
         return res
         .location(`${Utilities.getBaseURL(req)}/games/${createdGame.id}`).sendStatus(201);
     },
-    async getAll(req: Request, res: Response) {
+    async getAll(req: express.Request, res: express.Response) {
         const games = await db.games.findAll();
         console.log("getAll: "+games)
         return res
@@ -40,58 +41,70 @@ const GamesController = {
         .send(
             games.map
             (
-                ({Id, GameName}) => {return {Id, GameName}}
+                ({id, GameName}) => {return {id, GameName}}
             )
         )
     },
-    async getByID(req: Request, res: Response) {
-        let gameID: String = req.params.Id as String
-        console.log(gameID)
-        const game = await db.games.findByPk(gameID);
+    async getByID(req: express.Request, res: express.Response) {
+        
+        const game = await GamesController.getGame(req, res)
         if (!game) {
-            res.status(404).send({
-                error: `Game with this ID is not found. ${gameID}`
-            })
-            return null;
+            console.log("no game")
+            return
         }
-        return game;
+        console.log("Game is found")
+        return res.status(200).send(game);
     },
-    async modifyById(req: Request, res: Response) {
-        const gameToBeModified = await this.getByID(req, res)
+    async modifyById(req: express.Request, res: express.Response) {
+        if (!req.params.id) 
+            {
+                console.log(req.params.id)
+                return res.status(400).send({"error":"No id supplied"})
+            }     
+            console.log(req.params.id)
+        const gameToBeModified = await GamesController.getGame(req, res)
+        console.log(gameToBeModified)
         if (!gameToBeModified) {
-            return;
+            console.log("Game not found")
+            return res.status(404).send({"error":"Game not found with id "+gameToBeModified});
         }
         if (
             !req.body.GameName || 
             !req.body.GameDescription ||
             !req.body.ReleaseDate ||
-            !req.body.CategoryID ||
-            !req.body.ImageURL ||
-            !req.body.Reviews ||
-            !req.body.Comments
+            !req.body.CategoryID
         ) {
+            console.log(req.body.GameName+" "+req.body.GameDescription+" "+req.body.ReleaseDate+" "+req.body.CategoryID)
             return res.status(400).send(
                 {
                     error: "Missing parameters, please review data"
                 }
             )
         }
-        gameToBeModified.GameName = req.body.GameName
-        gameToBeModified.GameDescription = req.body.GameDescription
-        gameToBeModified.ReleaseDate = req.body.ReleaseDate
-        gameToBeModified.CategoryID = req.body.CategoryID
-        gameToBeModified.ImageURL = req.body.ImageURL
-        gameToBeModified.Reviews = req.body.Reviews
-        gameToBeModified.Comments = req.body.Comments
+        const modifiedGame = {
 
-        await gameToBeModified.save()
+            GameName: req.body.GameName,
+            GameDescription: req.body.GameDescription,
+            ReleaseDate: req.body.ReleaseDate,
+            CategoryID: req.body.CategoryID,
+            ImageURL: req.body.ImageURL || null,
+            Reviews: req.body.Reviews || null,
+            Comments: req.body.Comments || null,
+            updatedAt: new Date(),
+        }
 
-        return res.location(`${Utilities.getBaseURL(req)}/games/${gameToBeModified.id}`)
+        console.log("---")
+        console.log(modifiedGame)
+        console.log("---")
+
+        await db.games.update(modifiedGame, { where: {id: req.params.id}})
+
+        return res.location(`${Utilities.getBaseURL(req)}/games/${gameToBeModified}`)
         .status(201)
-        .send(gameToBeModified)
+        .send(modifiedGame)
     },
-    async deleteById(req: Request, res: Response) {
-        const gameToBeDeleted = await this.getByID(req, res)
+    async deleteById(req: express.Request, res: express.Response) {
+        const gameToBeDeleted = await GamesController.getGame(req, res)
         if (!gameToBeDeleted) {
             return;
         }
@@ -99,6 +112,19 @@ const GamesController = {
         return res.status(204)
         .send({error: "No content."})
 
+    },
+    async getGame(req: express.Request, res: express.Response) {
+        let gameID: string = req.params.id as string
+        console.log(gameID)
+        const game = await db.games.findByPk(gameID);
+        if (!game) {
+            console.log("Game not found")
+            res.status(404).send({
+                error: `Game with this ID is not found. ${gameID}`
+            })
+            return null;
+        }
+        return game
     }
 }
 

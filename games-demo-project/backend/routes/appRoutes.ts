@@ -1,8 +1,10 @@
-import { Express } from "express"
+import type express from "express"
 import GamesController from "../controllers/GamesController.ts"
 import UsersController from "../controllers/UsersController.ts"
+import UserCollectionsController from "../controllers/UserCollectionsController.ts"
+import CategoriesController from "../controllers/CategoriesController.ts"
 
-export default (app: Express): void => {
+export default (app: express.Application): void => {
     app.route("/games")
         .get(GamesController.getAll)
         .post(GamesController.create)
@@ -15,6 +17,20 @@ export default (app: Express): void => {
         .post(UsersController.create)
     app.route("/users/:id")
         .get(UsersController.getById)
-        .put(UsersController.updateById)
+        .put(UsersController.modifyById)
         .delete(UsersController.deleteById)
+    app.route("/usercollections/")
+        .get(UserCollectionsController.getAll)
+        .post(UserCollectionsController.create)
+    app.route("/usercollections/:id")
+        .get(UserCollectionsController.getById)
+        .put(UserCollectionsController.modifyById)
+        .delete(UserCollectionsController.deleteById)
+    app.route("/categories/")
+        //.get(UserCollectionsController.getAll)
+        .post(UserCollectionsController.create)
+    app.route("/categories/:id")
+        //.get(UserCollectionsController.getById)
+        //.put(UserCollectionsController.modifyById)
+        //.delete(UserCollectionsController.deleteById)
 }

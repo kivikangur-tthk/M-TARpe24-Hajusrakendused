@@ -1,14 +1,16 @@
-import {Sequelize, DataTypes} from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 
 //modelite pathid
 import GameModel from "../backend/models/Game.ts";
 import UserModel from "../backend/models/User.ts";
+import UserCollectionModel from './models/UserCollection.ts';
+import CategoryModel from './models/Category.ts';
 
-//sequelizei andmebaasi ühendusanddmed
+//sequelizei andmebaasi ühendusandmed 
 const sequelize = new Sequelize(
     process.env.DB_NAME!,
     process.env.DB_USERNAME!,
-    process.env.DB_PASSWORD!
+    process.env.DB_PASSWORD!,
     {
         host: process.env.DB_HOSTNAME!,
         dialect: "mariadb",
@@ -18,22 +20,34 @@ const sequelize = new Sequelize(
 
 //ühendusmeetod
 const connect = async (): Promise<void> => {
-    try {
+        try {
         await sequelize.authenticate();
         console.log("Connection established.");
     }
     catch (error)
     {
-        console.error("db connection error", error)
+        console.log("db connection error", error)
     }
 }
+const _Game = GameModel(sequelize)
+const _User = UserModel(sequelize)
+const _UserCollection = UserCollectionModel(sequelize)
+const _Category = CategoryModel(sequelize)
 //andmebaasi instants ja seostused
+_User.hasMany(_UserCollection,{foreignKey: "UserId" as "UserCollection"})
+_UserCollection.belongsTo(_User ,{foreignKey: "UserId" as "User"})
 const db = {
     Sequelize, 
     sequelize,
-    games: require("../backend/models/Game.ts")(sequelize, DataTypes),
-    users: require("../backend/models/User.ts")(sequelize, DataTypes)
+    games: _Game,
+    users: _User,
+    userCollections: _UserCollection,
+    categories: _Category
 };
+// db.games.belongsToMany(db.users, {through: db.userCollections, as: "UserId"})
+// db.users.belongsTo(db.games, {through: db.userCollections, as: "GameId"})
+
+
 
 //sünkroonmeetod
 const sync = async(): Promise<void> => {

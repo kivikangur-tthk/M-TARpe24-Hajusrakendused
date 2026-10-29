@@ -1,45 +1,72 @@
-import { Sequelize, DataTypes } from "sequelize";
+import type { UUID } from "node:crypto";
+import { DataTypes, Model, UUIDV4 } from "sequelize";
+import type { InferAttributes, InferCreationAttributes, CreationOptional, Sequelize } from "sequelize";
+import type { Json } from "sequelize/lib/utils";
 
-export default function GameModel(
-    sequelize: Sequelize,
-    dataTypes: typeof DataTypes
-) 
+export class Game extends Model<InferAttributes<Game>,InferCreationAttributes<Game>> {
+    //musthave
+    declare GameName: string;
+    declare GameDescription: string;
+    declare ReleaseDate: Date;
+    declare CategoryID: string;
+
+    //canhave
+    declare id: CreationOptional<string>
+    declare ImageURL: CreationOptional<string | null>
+    declare IsOwnedBy: CreationOptional<number>
+    declare Reviews: CreationOptional<Json | null>
+    declare Comments: CreationOptional<Json | null>
+
+    //dbhave
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
+}
+
+export default function initGameModel(sequelize: Sequelize) 
 {
-    const Game = sequelize.define(
-        "Game", {
+    Game.init(
+        {
             id: {
-                type: dataTypes.UUIDV4
+                type: DataTypes.UUID,
+                defaultValue: UUIDV4,
+                primaryKey: true
             },
             GameName: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             GameDescription: {
-                type: dataTypes.TEXT,
+                type: DataTypes.TEXT,
                 allowNull: false,
             },
             ReleaseDate: {
-                type: dataTypes.DATEONLY,
+                type: DataTypes.DATE,
                 allowNull: false,
             },
             ImageURL: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
             },
             IsOwnedBy: {
-                type: dataTypes.INTEGER,
+                type: DataTypes.INTEGER,
             },
             Reviews: {
-                type: dataTypes.ARRAY(dataTypes.STRING)
+                type: DataTypes.JSON
             },
             Comments: {
-                type: dataTypes.ARRAY(dataTypes.STRING)
+                type: DataTypes.JSON
             },
             CategoryID: {
-                type: dataTypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
-            }
+            },
+            createdAt: DataTypes.DATE,
+            updatedAt: DataTypes.DATE,
+
+        },
+        {
+            sequelize,
+            modelName: "Game"
         }
     )
-    console.log(Game === sequelize.models.Game)
     return Game;
 }
