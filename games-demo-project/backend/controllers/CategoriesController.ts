@@ -6,8 +6,13 @@ import { Category } from "../models/Category.ts"
 
 const CategoriesController = {
     async create (req: express.Request, res: express.Response) {
-        if (!req.body.CategoryName || !req.body.CategoryDescription) {
-            return res.status(400).send({error: "Missing parameters, please check it before you wreck it"})
+        const requiredFields = ["CategoryName","CategoryDescription"]
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please check it before you wreck it",
+                missing: missingFields
+            })
         }
         const newCategory = new Category
         newCategory.id = uuidv7()
