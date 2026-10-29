@@ -58,6 +58,15 @@ const GamesController = {
 
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
+                const requiredFields = ['GameName', 'GameDescription', 'ReleaseDate', 'CategoryID'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
+        }
         if (!req.params.id) 
             {
                 console.log(req.params.id)
@@ -70,19 +79,7 @@ const GamesController = {
             console.log("Game not found")
             return res.status(404).send({"error":"Game not found with id "+gameToBeModified});
         }
-        if (
-            !req.body.GameName || 
-            !req.body.GameDescription ||
-            !req.body.ReleaseDate ||
-            !req.body.CategoryID
-        ) {
-            console.log(req.body.GameName+" "+req.body.GameDescription+" "+req.body.ReleaseDate+" "+req.body.CategoryID)
-            return res.status(400).send(
-                {
-                    error: "Missing parameters, please review data"
-                }
-            )
-        }
+        
         const modifiedGame = {
 
             GameName: req.body.GameName,
