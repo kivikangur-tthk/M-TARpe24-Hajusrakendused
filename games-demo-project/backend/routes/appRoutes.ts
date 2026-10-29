@@ -35,7 +35,7 @@ export default (app: express.Application): void => {
         .get(CategoriesController.getAll)
         .post(checkReqestBody, CategoriesController.create)
     app.route("/categories/:id")
-        //.get(CategoriesController.getById)
+        .get(CategoriesController.getById)
         //.put(CategoriesController.modifyById)
         //.delete(CategoriesController.deleteById)
 }

@@ -28,6 +28,26 @@ const CategoriesController = {
         return res.status(200).send(categories.map(
             ({id, CategoryName}) => {return {id, CategoryName}}
         ))
+    },
+    async getById(req: express.Request, res: express.Response) {
+        const category = await CategoriesController.getCategory(req, res)
+        if (!category) {
+            return
+        }
+        return res.status(200).send(category)
+    },
+    async getCategory(req: express.Request, res: express.Response) {
+        let categoryID: string = req.params.id as string
+        const category = await db.categories.findByPk(categoryID);
+        if (!category) {
+            res.status(404).send(
+                {
+                    error: `Category with this ID is not found. ${categoryID}`
+                }
+            )
+            return null
+        } 
+        return category
     }
 }
 
