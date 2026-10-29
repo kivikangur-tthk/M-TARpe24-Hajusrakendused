@@ -14,13 +14,20 @@ const CategoriesController = {
                 missing: missingFields
             })
         }
-        const newCategory = new Category
-        newCategory.id = uuidv7()
-        newCategory.CategoryName = req.body.CategoryName
-        newCategory.CategoryDescription = req.body.CategoryDescription
+        const newCategory = {
+        id: uuidv7(),
+        CategoryName: req.body.CategoryName,
+        CategoryDescription: req.body.CategoryDescription
+        }
 
         const result = await db.categories.create(newCategory)
         return res.location(`${Utilities.getBaseURL(req)}/categories/${result.id}`).sendStatus(201)
+    },
+    async getAll(req: express.Request, res: express.Response) {
+        const categories = await db.categories.findAll();
+        return res.status(200).send(categories.map(
+            ({id, CategoryName}) => {return {id, CategoryName}}
+        ))
     }
 }
 

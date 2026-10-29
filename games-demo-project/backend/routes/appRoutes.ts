@@ -32,10 +32,10 @@ export default (app: express.Application): void => {
         .delete(UserCollectionsController.deleteById)
 
     app.route("/categories/")
-        //.get(UserCollectionsController.getAll)
+        .get(CategoriesController.getAll)
         .post(checkReqestBody, CategoriesController.create)
     app.route("/categories/:id")
-        //.get(UserCollectionsController.getById)
-        //.put(UserCollectionsController.modifyById)
-        //.delete(UserCollectionsController.deleteById)
+        //.get(CategoriesController.getById)
+        //.put(CategoriesController.modifyById)
+        //.delete(CategoriesController.deleteById)
 }
