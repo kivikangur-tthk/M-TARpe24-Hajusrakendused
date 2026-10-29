@@ -11,6 +11,14 @@ const UserCollectionsController = {
 
     //update for standards
     async create(req: express.Request, res: express.Response) {
+        const requiredFields = ['CollectionName', 'GameIDs', 'UserId'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
+        }
         //check if req body has a user id
         //if not, use status 403
         //else, add into object to be created
@@ -20,13 +28,15 @@ const UserCollectionsController = {
     "GameIDs": "ä,ö,ü",
     "CollectionName":"fresh games off the slopstack"
 }*/
+        if (!req.body.UserId) {
+            //todo: better user check here. seek in db: if exists, pass, if not, kick
+            return res.status(403).send({error:"No user id specified, you must be logged in."})
+        }
         if (!req.body.CollectionName 
             || !req.body.GameIDs
             || !req.body.UserId
         ) {
-            if (!req.body.UserId) {
-                return res.status(403).send({error:"No user id specified, you must be logged in."})
-            }
+
             return res.status(400).send(
                 {
                     error: "Missing parameters, please review data"
@@ -65,12 +75,17 @@ const UserCollectionsController = {
     },
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
+        const requiredFields = ['CollectionName', 'GameIDs', 'UserId'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
+        }
         if (!req.params.id) {
             console.log(req.params.id)
             return res.status(400).send({"error":"No id supplied"})
-        }
-        if (!req.body) {
-            return res.status(400).send({"error":"No body was supplied, nothing was changed"})
         }
 
         const userCollectionToBeModified = await UserCollectionsController.getUserCollection(req, res)
