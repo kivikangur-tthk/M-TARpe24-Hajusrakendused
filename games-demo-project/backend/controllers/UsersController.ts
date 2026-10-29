@@ -6,6 +6,8 @@ import { User } from "../models/User.ts"
 import GamesController from "./GamesController.ts";
 
 const UsersController = {
+
+    //update for standards
     async create(req: express.Request, res: express.Response) {
         if (!req.body.UserName || 
         !req.body.EmailAddress ||
@@ -47,6 +49,8 @@ const UsersController = {
         }
         return res.status(200).send(user)
     },
+
+    //update for standards
     async modifyById(req: express.Request, res: express.Response) {
         if (!req.params.id) {
             return res.status(400).send({"error":"No id supplied"})

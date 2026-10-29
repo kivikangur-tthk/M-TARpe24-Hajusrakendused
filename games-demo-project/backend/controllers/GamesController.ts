@@ -56,6 +56,7 @@ const GamesController = {
         return res.status(200).send(game);
     },
 
+    //update for standards
     async modifyById(req: express.Request, res: express.Response) {
         if (!req.params.id) 
             {

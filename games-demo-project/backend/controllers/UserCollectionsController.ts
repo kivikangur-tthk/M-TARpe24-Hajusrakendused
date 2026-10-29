@@ -8,6 +8,8 @@ import { DATE } from "sequelize";
 import type { UserCollection } from "../models/UserCollection.ts";
 
 const UserCollectionsController = {
+
+    //update for standards
     async create(req: express.Request, res: express.Response) {
         //check if req body has a user id
         //if not, use status 403
@@ -61,6 +63,7 @@ const UserCollectionsController = {
         }
         return res.status(200).send(userCollection);
     },
+    //update for standards
     async modifyById(req: express.Request, res: express.Response) {
         if (!req.params.id) {
             console.log(req.params.id)
