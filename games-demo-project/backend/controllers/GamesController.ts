@@ -7,18 +7,16 @@ import type { Game } from "../models/Game.ts";
 
 const GamesController = {
     async create(req: express.Request, res: express.Response)  {
-        if (
-            !req.body.GameName || 
-            !req.body.GameDescription ||
-            !req.body.ReleaseDate ||
-            !req.body.CategoryID
-        ) {
-            return res.status(400).send(
-                {
-                    error: "Missing parameters, please review data"
-                }
-            )
+        const requiredFields = ['GameName', 'GameDescription', 'ReleaseDate', 'CategoryID'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+
+        if (missingFields.length > 0) {
+            return res.status(400).send({
+                error: "Missing parameters, please review data",
+                missing: missingFields
+            });
         }
+
         const newGame = {
             id: uuidv7(),
             GameName: req.body.GameName,
@@ -33,6 +31,7 @@ const GamesController = {
         return res
         .location(`${Utilities.getBaseURL(req)}/games/${createdGame.id}`).sendStatus(201);
     },
+
     async getAll(req: express.Request, res: express.Response) {
         const games = await db.games.findAll();
         console.log("getAll: "+games)
@@ -45,6 +44,7 @@ const GamesController = {
             )
         )
     },
+
     async getByID(req: express.Request, res: express.Response) {
         
         const game = await GamesController.getGame(req, res)
@@ -55,6 +55,7 @@ const GamesController = {
         console.log("Game is found")
         return res.status(200).send(game);
     },
+
     async modifyById(req: express.Request, res: express.Response) {
         if (!req.params.id) 
             {
@@ -103,6 +104,7 @@ const GamesController = {
         .status(201)
         .send(modifiedGame)
     },
+
     async deleteById(req: express.Request, res: express.Response) {
         const gameToBeDeleted = await GamesController.getGame(req, res)
         if (!gameToBeDeleted) {
@@ -113,6 +115,7 @@ const GamesController = {
         .send({error: "No content."})
 
     },
+
     async getGame(req: express.Request, res: express.Response) {
         let gameID: string = req.params.id as string
         console.log(gameID)
