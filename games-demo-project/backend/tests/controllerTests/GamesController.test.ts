@@ -29,7 +29,7 @@ describe("GamesController", () => {
         vi.clearAllMocks();
     })
 
-    test("ReturnAllGamesWith200Status", async () =>{
+    test("Return_AllGames_With200Status", async () =>{
         //ülesseade
         mocks.findAll.mockResolvedValue(
             [
