@@ -1,8 +1,8 @@
 import * as express from "express"
-import { db } from "../db.ts"
+import { db } from "../src/db.ts"
 import Utilities from "./Utilities.ts"
 import {v7 as uuidv7 } from "uuid"
-import { Category } from "../models/Category.ts"
+import { Category } from "../src/models/Category.ts"
 
 const CategoriesController = {
     async create (req: express.Request, res: express.Response) {

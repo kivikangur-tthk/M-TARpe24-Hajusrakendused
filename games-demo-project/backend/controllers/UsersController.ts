@@ -1,8 +1,8 @@
 import * as express from "express";
-import { db } from "../db.ts";
+import { db } from "../src/db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
-import { User } from "../models/User.ts"
+import { User } from "../src/models/User.ts"
 import GamesController from "./GamesController.ts";
 
 const UsersController = {

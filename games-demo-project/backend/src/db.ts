@@ -1,8 +1,8 @@
 import { Sequelize, DataTypes } from 'sequelize';
 
 //modelite pathid
-import GameModel from "../backend/models/Game.ts";
-import UserModel from "../backend/models/User.ts";
+import GameModel from "./models/Game.ts";
+import UserModel from "./models/User.ts";
 import UserCollectionModel from './models/UserCollection.ts';
 import CategoryModel from './models/Category.ts';
 

@@ -1,9 +1,9 @@
 import * as express from "express";
-import { db } from "../db.ts"
+import { db } from "../src/db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { error } from "node:console";
-import type { Game } from "../models/Game.ts";
+import type { Game } from "../src/models/Game.ts";
 
 const GamesController = {
     async create(req: express.Request, res: express.Response)  {
