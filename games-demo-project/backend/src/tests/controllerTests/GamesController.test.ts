@@ -216,6 +216,7 @@ describe("GamesController", () => {
         expect(updatedGame.Comments).toBe(req.body.Comments)
         expect(updatedGame.createdAt).toBe(undefined)
         expect(updatedGame.updatedAt).toBeInstanceOf(Date)
+        //console.log("call log:"+mocks.update.mock.calls[0])
         expect(mocks.update.mock.calls[0][1]).toEqual({
             where: {
                 id: game.id
