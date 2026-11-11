@@ -9,13 +9,15 @@ import { v7 as uuidv7 } from "uuid";
 
 //mock db
 const mocks = vi.hoisted(()=> ({
-    findAll: vi.fn()
+    findAll: vi.fn(),
+    findByPk: vi.fn()
 }))
 
 vi.mock("../../db.ts", () => ({
     db: {
         games: {
-            findAll: mocks.findAll
+            findAll: mocks.findAll,
+            findByPk: mocks.findByPk
         }
     }
 }))
@@ -55,6 +57,40 @@ describe("GamesController", () => {
                 {id: "01a18e66-5fd8-76d4-a0d8-ac475e2d340c",GameName:"vi-game-test2"},
                 {id: "01a18e66-5fdb-73f6-9f37-033664a02b5a",GameName:"vi-game-test3"}
             ])
+    })
+
+    test("Return_OneGameById_With200Status", async() =>{
+        const game = 
+        {
+            id: "01a18e66-5fdb-73f6-9f36-fec1238c7d30",GameName:"vi-game-test1",
+            GameDescription:"vi-game-testcription1",
+            ReleaseDate: new Date(),
+            CategoryID: "lamp",
+            ImageURL: null,
+            IsOwnedBy: 0,
+            Reviews: null,
+            Comments: null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+        const req = {
+            params: {
+                id: game.id
+            }
+        } as unknown as Request
+        
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            send: vi.fn().mockReturnThis(),
+        } as unknown as Response
+        mocks.findByPk.mockResolvedValue(game)
+
+        await _GamesController.getByID(req, res)
+
+        expect(mocks.findByPk).toHaveBeenCalledExactlyOnceWith(game.id)
+        expect(res.status).toHaveBeenCalledWith(200)
+        expect(res.send).toHaveBeenCalledWith(game)
+
     })
 })
 
