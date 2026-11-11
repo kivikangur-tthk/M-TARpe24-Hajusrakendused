@@ -3,7 +3,6 @@ import { db } from "../db.ts";
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
 import { User } from "../models/User.ts"
-import GamesController from "./GamesController.ts";
 
 const UsersController = {
 

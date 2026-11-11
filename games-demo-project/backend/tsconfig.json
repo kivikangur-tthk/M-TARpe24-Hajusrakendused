@@ -4,7 +4,7 @@
 //eekspres
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
+    "forceConsistentCasingInFileNames": true,
     // File Layout
     "rootDir": "../backend",
     "outDir": "./dist",

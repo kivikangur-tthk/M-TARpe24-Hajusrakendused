@@ -2,8 +2,6 @@ import * as express from "express";
 import { db } from "../db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
-import { error } from "node:console";
-import type { Game } from "../models/Game.ts";
 
 const GamesController = {
     async create(req: express.Request, res: express.Response)  {
@@ -86,6 +84,7 @@ const GamesController = {
             GameDescription: req.body.GameDescription,
             ReleaseDate: req.body.ReleaseDate,
             CategoryID: req.body.CategoryID,
+            IsOwnedBy: req.body.IsOwnedBy || null, //the test actually found this, jipppee 
             ImageURL: req.body.ImageURL || null,
             Reviews: req.body.Reviews || null,
             Comments: req.body.Comments || null,

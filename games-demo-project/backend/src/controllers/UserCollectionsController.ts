@@ -2,9 +2,6 @@ import * as express from "express";
 import { db } from "../db.ts"
 import Utilities from "./Utilities.ts";
 import { v7 as uuidv7 } from "uuid";
-import { error } from "node:console";
-import * as UUID from "node:crypto";
-import { DATE } from "sequelize";
 import type { UserCollection } from "../models/UserCollection.ts";
 
 const UserCollectionsController = {
