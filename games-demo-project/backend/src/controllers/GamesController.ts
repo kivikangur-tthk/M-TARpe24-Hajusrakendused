@@ -84,6 +84,7 @@ const GamesController = {
             GameDescription: req.body.GameDescription,
             ReleaseDate: req.body.ReleaseDate,
             CategoryID: req.body.CategoryID,
+            IsOwnedBy: req.body.IsOwnedBy || null, //the test actually found this, jipppee 
             ImageURL: req.body.ImageURL || null,
             Reviews: req.body.Reviews || null,
             Comments: req.body.Comments || null,
