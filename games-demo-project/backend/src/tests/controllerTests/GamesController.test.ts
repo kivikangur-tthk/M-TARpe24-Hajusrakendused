@@ -12,7 +12,8 @@ const mocks = vi.hoisted(()=> ({
     findAll: vi.fn(),
     findByPk: vi.fn(),
     create: vi.fn(),
-    update: vi.fn()
+    update: vi.fn(),
+    destroy: vi.fn()
 }))
 
 vi.mock("../../db.ts", () => ({
@@ -21,7 +22,8 @@ vi.mock("../../db.ts", () => ({
             findAll: mocks.findAll,
             findByPk: mocks.findByPk,
             create: mocks.create,
-            update: mocks.update
+            update: mocks.update,
+            destroy: mocks.destroy
         }
     }
 }))
@@ -225,7 +227,31 @@ describe("GamesController", () => {
         expect(res.status).toHaveBeenCalledWith(201)
     })
 
+    test("Return_NoContentOnDelete_With204Status", async() => {
+        const thisid = "01a18e66-5fdb-73f6-9f36-fec1238c7d30"
+        const game = {
+            id: thisid,
+            destroy: vi.fn().mockResolvedValue(undefined)
+        }
+        mocks.findByPk.mockResolvedValue(game)
+        const req = {
+            params: {
+                id: thisid
+            }
+        } as unknown as Request
+        const res = {
+            status:vi.fn().mockReturnThis(),
+            send:vi.fn().mockReturnThis(),
+        } as unknown as Response
 
+        //äksioñ
+        await _GamesController.deleteById(req, res)
+
+        //kontroll
+        expect(mocks.findByPk).toHaveBeenCalledWith(thisid)
+        expect(game.destroy).toHaveBeenCalledOnce();
+        expect(res.status).toHaveBeenCalledWith(204);
+    })
 })
 
 //write test
