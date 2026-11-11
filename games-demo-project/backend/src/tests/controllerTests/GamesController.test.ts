@@ -205,14 +205,22 @@ describe("GamesController", () => {
 
         const updatedGame = mocks.update.mock.calls[0][0]
         console.log("updatedGame: "+updatedGame)
-        console.log("updatedGame: "+result.id)
-        expect(updatedGame.id).toBe(game.id)
-        expect(updatedGame.GameName).toBe(game.GameName)
-        expect(updatedGame.GameDescription).toBe(game.GameDescription)
-        expect(updatedGame.ReleaseDate).toBe(game.ReleaseDate)
-        expect(updatedGame.CategoryID).toBe(game.CategoryID)
-
-
+        //expect(updatedGame.id).toBe(game.id)
+        expect(updatedGame.GameName).toBe(req.body.GameName)
+        expect(updatedGame.GameDescription).toBe(req.body.GameDescription)
+        expect(updatedGame.ReleaseDate).toBe(req.body.ReleaseDate)
+        expect(updatedGame.CategoryID).toBe(req.body.CategoryID)
+        expect(updatedGame.ImageURL).toBe(req.body.ImageURL)
+        expect(updatedGame.IsOwnedBy).toBe(req.body.IsOwnedBy)
+        expect(updatedGame.Reviews).toBe(req.body.Reviews)
+        expect(updatedGame.Comments).toBe(req.body.Comments)
+        expect(updatedGame.createdAt).toBe(undefined)
+        expect(updatedGame.updatedAt).toBeInstanceOf(Date)
+        expect(mocks.update.mock.calls[0][1]).toEqual({
+            where: {
+                id: game.id
+            }
+        })
         expect(res.status).toHaveBeenCalledWith(201)
     })
 
