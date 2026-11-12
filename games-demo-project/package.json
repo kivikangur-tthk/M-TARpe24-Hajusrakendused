@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "concurrently": "^10.0.7",
+    "nodemon": "^3.1.14"
+  },
+  "name": "games-demo-project",
+  "version": "1.0.0",
+  "description": "Rakendus salvestab ja kuvab arvutimängude infot ja seda, kes kui palju mingit mängu mänginud on.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd backend && nodemon .\" \"cd frontend && npm run dev\"",
+    "devstart": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
