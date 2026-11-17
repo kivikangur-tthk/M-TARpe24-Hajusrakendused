@@ -1,6 +1,6 @@
 {
-    "watch": ["backend"],
-    "ext":"ts",
+    "watch": ["src"],
+    "ext":"ts,json",
     "execMap": {
         "ts":"node --experimental-strip-types"
     }
