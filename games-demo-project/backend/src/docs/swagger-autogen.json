@@ -13,13 +13,19 @@
     },
     {
       "name": "Users"
+    },
+    {
+      "name": "UserCollections"
+    },
+    {
+      "name": "Categories"
     }
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/games": {
+    "/games/": {
       "get": {
         "tags": [
           "Games"
@@ -28,6 +34,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
@@ -66,8 +75,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "201": {
-            "description": "Bad Request"
+          "Games": {
+            "description": ""
           }
         }
       }
@@ -89,6 +98,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
@@ -144,6 +156,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
@@ -163,20 +178,32 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }
     },
-    "/users": {
+    "/users/": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -207,12 +234,18 @@
           },
           "406": {
             "description": "Not Acceptable"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }
     },
     "/users/{id}": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -225,6 +258,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
@@ -292,10 +328,16 @@
           },
           "406": {
             "description": "Not Acceptable"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -308,20 +350,32 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }
     },
     "/usercollections/": {
       "get": {
+        "tags": [
+          "UserCollections"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "UserCollections"
+        ],
         "description": "",
         "parameters": [
           {
@@ -352,12 +406,18 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }
     },
     "/usercollections/{id}": {
       "get": {
+        "tags": [
+          "UserCollections"
+        ],
         "description": "",
         "parameters": [
           {
@@ -370,10 +430,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "put": {
+        "tags": [
+          "UserCollections"
+        ],
         "description": "",
         "parameters": [
           {
@@ -413,10 +479,16 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "UserCollections"
+        ],
         "description": "",
         "parameters": [
           {
@@ -429,20 +501,32 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }
     },
     "/categories/": {
       "get": {
+        "tags": [
+          "Categories"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "post": {
+        "tags": [
+          "Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -464,12 +548,18 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }
     },
     "/categories/{id}": {
       "get": {
+        "tags": [
+          "Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -482,10 +572,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "put": {
+        "tags": [
+          "Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -516,10 +612,16 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "Games": {
+            "description": ""
           }
         }
       },
       "delete": {
+        "tags": [
+          "Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -532,6 +634,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "Games": {
+            "description": ""
           }
         }
       }

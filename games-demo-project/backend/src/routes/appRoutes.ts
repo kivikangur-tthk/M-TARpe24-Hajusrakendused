@@ -1,41 +1,35 @@
-import type express from "express"
-import checkReqestBody from "../controllers/middleware/checkRequestBody.ts"
-import GamesController from "../controllers/GamesController.ts"
-import UsersController from "../controllers/UsersController.ts"
-import UserCollectionsController from "../controllers/UserCollectionsController.ts"
-import CategoriesController from "../controllers/CategoriesController.ts"
+import type express from "express";
+import gamesRoutes from "./gamesRoutes.ts";
+import usersRoutes from "./usersRoutes.ts";
+import userCollectionsRoutes from "./userCollectionsRoutes.ts";
+import categoriesRoutes from "./categoriesRoutes.ts";
 
 export default (app: express.Application): void => {
+    // Globaalne 500 vastus kõigile allolevatele otspunktidele
+    app.use((req, res, next) => {
+        /* #swagger.responses = { 
+            description: 'Internal Server Error' 
+        } */
+        next();
+    });
 
-    app.route("/games")
-        .get(GamesController.getAll)
-        .post(checkReqestBody, GamesController.create)
-    app.route("/games/:id")
-        .get(GamesController.getByID)
-        .put(checkReqestBody, GamesController.modifyById)
-        .delete(GamesController.deleteById)
+    app.use("/games", (req, res, next) => {
+        // #swagger.tags = ['Games']
+        next();
+    }, gamesRoutes);
 
-    app.route("/users")
-        .get(UsersController.getAll)
-        .post(checkReqestBody, UsersController.create)
-    app.route("/users/:id")
-        .get(UsersController.getById)
-        .put(checkReqestBody, UsersController.modifyById)
-        .delete(UsersController.deleteById)
+    app.use("/users", (req, res, next) => {
+        // #swagger.tags = ['Users']
+        next();
+    }, usersRoutes);
 
-    app.route("/usercollections/")
-        .get(UserCollectionsController.getAll)
-        .post(checkReqestBody, UserCollectionsController.create)
-    app.route("/usercollections/:id")
-        .get(UserCollectionsController.getById)
-        .put(checkReqestBody, UserCollectionsController.modifyById)
-        .delete(UserCollectionsController.deleteById)
+    app.use("/usercollections", (req, res, next) => {
+        // #swagger.tags = ['UserCollections']
+        next();
+    }, userCollectionsRoutes);
 
-    app.route("/categories/")
-        .get(CategoriesController.getAll)
-        .post(checkReqestBody, CategoriesController.create)
-    app.route("/categories/:id")
-        .get(CategoriesController.getById)
-        .put(checkReqestBody, CategoriesController.modifyById)
-        .delete(CategoriesController.deleteById)
-}
+    app.use("/categories", (req, res, next) => {
+        // #swagger.tags = ['Categories']
+        next();
+    }, categoriesRoutes);
+};
