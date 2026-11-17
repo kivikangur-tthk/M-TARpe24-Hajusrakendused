@@ -7,7 +7,7 @@ import categoriesRoutes from "./categoriesRoutes.ts";
 export default (app: express.Application): void => {
     // Globaalne 500 vastus kõigile allolevatele otspunktidele
     app.use((req, res, next) => {
-        /* #swagger.responses = { 
+        /* #swagger.responses[500] = { 
             description: 'Internal Server Error' 
         } */
         next();
