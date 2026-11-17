@@ -5,6 +5,7 @@ import { v7 as uuidv7 } from "uuid";
 
 const GamesController = {
     async create(req: express.Request, res: express.Response)  {
+        // #swagger.tags = ['Games']
         const requiredFields = ['GameName', 'GameDescription', 'ReleaseDate', 'CategoryID'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
 
@@ -31,6 +32,7 @@ const GamesController = {
     },
 
     async getAll(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Games']
         const games = await db.games.findAll();
         console.log("getAll: "+games)
         return res
@@ -44,7 +46,7 @@ const GamesController = {
     },
 
     async getByID(req: express.Request, res: express.Response) {
-        
+        // #swagger.tags = ['Games']
         const game = await GamesController.getGame(req, res)
         if (!game) {
             console.log("no game")
@@ -56,6 +58,7 @@ const GamesController = {
 
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Games']
         const requiredFields = ['GameName', 'GameDescription', 'ReleaseDate', 'CategoryID'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
 
@@ -103,6 +106,7 @@ const GamesController = {
     },
 
     async deleteById(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Games']
         const gameToBeDeleted = await GamesController.getGame(req, res)
         if (!gameToBeDeleted) {
             return;
@@ -114,6 +118,7 @@ const GamesController = {
     },
 
     async getGame(req: express.Request, res: express.Response) {
+        // #swagger.tags = ['Games']
         let gameID: string = req.params.id as string
         console.log(gameID)
         const game = await db.games.findByPk(gameID);

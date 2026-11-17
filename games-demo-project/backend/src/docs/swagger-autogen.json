@@ -1,0 +1,540 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My Games API",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Games"
+    },
+    {
+      "name": "Users"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/games": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "GameName": {
+                  "example": "any"
+                },
+                "GameDescription": {
+                  "example": "any"
+                },
+                "ReleaseDate": {
+                  "example": "any"
+                },
+                "CategoryID": {
+                  "example": "any"
+                },
+                "ImageURL": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/games/{id}": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "GameName": {
+                  "example": "any"
+                },
+                "GameDescription": {
+                  "example": "any"
+                },
+                "ReleaseDate": {
+                  "example": "any"
+                },
+                "CategoryID": {
+                  "example": "any"
+                },
+                "IsOwnedBy": {
+                  "example": "any"
+                },
+                "ImageURL": {
+                  "example": "any"
+                },
+                "Reviews": {
+                  "example": "any"
+                },
+                "Comments": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Password": {
+                  "example": "any"
+                },
+                "PasswordConfirmation": {
+                  "example": "any"
+                },
+                "UserName": {
+                  "example": "any"
+                },
+                "EmailAddress": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserName": {
+                  "example": "any"
+                },
+                "PasswordHash": {
+                  "example": "any"
+                },
+                "EmailAddress": {
+                  "example": "any"
+                },
+                "SignupDate": {
+                  "example": "any"
+                },
+                "UserStatus": {
+                  "example": "any"
+                },
+                "UserCollectionID": {
+                  "example": "any"
+                },
+                "ReviewListID": {
+                  "example": "any"
+                },
+                "ProfileID": {
+                  "example": "any"
+                },
+                "CredentialID": {
+                  "example": "any"
+                },
+                "createdAt": {
+                  "example": "any"
+                },
+                "Password": {
+                  "example": "any"
+                },
+                "PasswordConfirmation": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/usercollections/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserId": {
+                  "example": "any"
+                },
+                "CollectionName": {
+                  "example": "any"
+                },
+                "GameIDs": {
+                  "example": "any"
+                },
+                "CollectionDescription": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/usercollections/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "CollectionName": {
+                  "example": "any"
+                },
+                "CollectionDescription": {
+                  "example": "any"
+                },
+                "GameIDs": {
+                  "example": "any"
+                },
+                "UserId": {
+                  "example": "any"
+                },
+                "createdAt": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "CategoryName": {
+                  "example": "any"
+                },
+                "CategoryDescription": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "CategoryName": {
+                  "example": "any"
+                },
+                "CategoryDescription": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  }
+}

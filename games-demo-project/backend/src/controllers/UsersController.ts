@@ -54,7 +54,7 @@ const UsersController = {
 
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
-
+        // #swagger.tags = ['Users']
         const requiredFields = ['UserName', 'EmailAddress', 'Password', 'PasswordConfirmation'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
         if (missingFields.length > 0) {
