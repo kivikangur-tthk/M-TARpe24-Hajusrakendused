@@ -59,21 +59,32 @@ async function saveGame() {
     saving.value = true
     error.value = ""
 
+    console.log("I HAVE CLICKED DA EDIT BATON to saev")
     try {
         if (props.gameId) {
             await gamesServices.update(props.gameId, form.value)
+            console.log("try-if")
         } else {
             await gamesServices.create(form.value)
+            console.log("try-else")
         }
+        console.log(form.value)
 
         emit("saved")
 
-        if (props.gameId) {form.value=emptyGame()}
+        console.log("try-/")
+        if (props.gameId) 
+        {
+            console.log("try-2if")
+            form.value=emptyGame()
+        }
     } catch (err) {
+        console.log("catch")
         error.value = "Saving failed"
-        console.error(err)
+        console.error(err.message)
     } finally {
         saving.value = false
+        console.log("finally")
     }
 }
 

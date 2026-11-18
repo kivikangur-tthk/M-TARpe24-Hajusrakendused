@@ -13,8 +13,8 @@ export interface Game {
     CategoryID: string,
     ImageURL: string | null,
     IsOwnedBy: number,
-    Review: unknown | null,
-    Comments: unknown | null
+    // Review: unknown | null,
+    // Comments: unknown | null
 }
 
 //create

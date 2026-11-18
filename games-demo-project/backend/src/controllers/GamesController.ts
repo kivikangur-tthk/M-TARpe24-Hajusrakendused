@@ -27,7 +27,9 @@ const GamesController = {
         const createdGame = await db.games.create(newGame);
 
         return res
-        .location(`${Utilities.getBaseURL(req)}/games/${createdGame.id}`).sendStatus(201);
+        .location(`${Utilities.getBaseURL(req)}/games/${createdGame.id}`)
+        .send({"OK":"OK"})
+        .status(201);
     },
 
     async getAll(req: express.Request, res: express.Response) {
