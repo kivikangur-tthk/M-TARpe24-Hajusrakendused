@@ -6,6 +6,9 @@ import type { GameSummary } from '../types/Game'
 const games = ref<GameSummary[]>([])
 const loading = ref(false)
 const error = ref("")
+const emit = defineEmits<{
+    select: [id:string]
+}>()
 
 async function loadGames() {
     loading.value = true
@@ -32,8 +35,8 @@ onMounted(loadGames)
         <p v-else-if="error">{{ error }}</p>
         <p v-else-if="games.length === 0">No games have been found</p>
         <ul v-else>
-            <li v-for="game in games" :key="game.id">
-                {{ game.GameName }} ( {{ game.id }} )
+            <li v-for="game in games":key="game.id">
+                <button @click="emit('select', game.id) ">{{ game.GameName }}</button> ( {{ game.id }} )
             </li>
         </ul>
     </section>
