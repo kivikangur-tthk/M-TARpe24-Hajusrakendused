@@ -46,7 +46,7 @@ async function loadGame() {
             GameName: game.GameName,
             GameDescription: game.GameDescription,
             ReleaseDate: game.ReleaseDate ? String(game.ReleaseDate).slice(0, 10) : "",
-            CategoryID: "01a1d086-eb63-703f-a886-f10f75a50f34",
+            CategoryID: game.CategoryID,
             ImageURL: game.ImageURL
         }
     } catch (err) {
