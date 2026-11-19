@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import GamesList from '../components/GamesList.vue';
-import GameDetails from '../components/GameDetails.vue';
-import GameForm from '../components/GameForm.vue'
+import GamesList from '../components/game/GamesList.vue';
+import GameDetails from '../components/game/GameDetails.vue';
+import GameForm from '../components/game/GameForm.vue'
 import { gamesServices } from "../services/gamesServices.ts";
 
 const selectedGameId = ref<string | null>(null)

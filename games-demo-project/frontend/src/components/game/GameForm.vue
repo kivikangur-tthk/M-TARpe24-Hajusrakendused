@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue"
-import { gamesServices } from "../services/gamesServices";
-import { type GameInput, type Category } from "../types/Game";
+import { gamesServices } from "../../services/gamesServices";
+import { type GameInput, type Category } from "../../types/Game";
 
 const props = defineProps<{
     gameId?: string | null

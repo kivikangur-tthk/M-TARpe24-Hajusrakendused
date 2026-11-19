@@ -3,6 +3,7 @@
 import {createRouter, createWebHistory} from "vue-router"
 
 import GamesView from "../views/GamesView.vue"
+import RegisterView from "../views/RegisterView.vue"
 /*teiste vaadete impordid käivad siia ka*/
 const router = createRouter({
   history: createWebHistory(),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: "/games",
       name: "games",
       component: GamesView
+    },
+    {
+      path: "/register",
+      name: "users",
+      component: RegisterView
     }
   ]
 })

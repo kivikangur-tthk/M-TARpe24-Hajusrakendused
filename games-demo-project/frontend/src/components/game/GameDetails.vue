@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref, watch} from "vue"
-import { gamesServices } from "../services/gamesServices";
-import type { Game } from "../types/Game";
+import { gamesServices } from "../../services/gamesServices";
+import type { Game } from "../../types/Game";
 
 const props = defineProps<{
     gameId: string
@@ -42,8 +42,8 @@ watch( () => props.gameId, loadGame, {immediate: true})
             <!-- <p><img src="{{ game.ImageURL }}"></p> -->
             <p>{{ game.CategoryID }}</p>
             <p>{{ game.IsOwnedBy }}</p>
-            <p>{{ game.Review }}</p>
-            <p>{{ game.Comments }}</p>
+            <!-- <p>{{ game.Review }}</p>
+            <p>{{ game.Comments }}</p> -->
         </div>
     </section>
 </template>

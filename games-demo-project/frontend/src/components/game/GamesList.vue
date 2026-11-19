@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { gamesServices } from '../services/gamesServices';
-import type { GameSummary } from '../types/Game'
+import { gamesServices } from '../../services/gamesServices';
+import type { GameSummary } from '../../types/Game'
 
 const games = ref<GameSummary[]>([])
 const loading = ref(false)
