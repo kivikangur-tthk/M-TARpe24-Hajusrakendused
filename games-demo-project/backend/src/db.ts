@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
     {
         host: process.env.DB_HOSTNAME!,
         dialect: "mariadb",
-        logging: console.log,
+        logging: process.env.DB_LOGGING === "false" ? false : console.log,
     }
 );
 
