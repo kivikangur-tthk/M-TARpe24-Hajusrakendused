@@ -30,13 +30,13 @@ onMounted(loadGames)
 <template>
     <section>
         <h2>Games</h2>
-        <button @click="loadGames">Refresh</button>
+        <button @click="loadGames" class="btn btn-info">Refresh</button>
         <p v-if="loading">Loading games...</p>
         <p v-else-if="error">{{ error }}</p>
         <p v-else-if="games.length === 0">No games have been found</p>
         <ul v-else>
             <li v-for="game in games":key="game.id">
-                <button @click="emit('select', game.id) ">{{ game.GameName }}</button> ( {{ game.id }} )
+                <button @click="emit('select', game.id) "class="btn btn-info">{{ game.GameName }}</button> ( {{ game.id }} )
             </li>
         </ul>
     </section>
