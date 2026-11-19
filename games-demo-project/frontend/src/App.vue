@@ -14,7 +14,7 @@ import GamesView from "./views/GamesView.vue"
       <nav>
         <!-- validate that user is logged in here, block off any routerlinks that unlogged in user shouldnt have access to -->
         <RouterLink to="/games">Games</RouterLink>
-        <RouterLink to="/users">Users</RouterLink>
+        <RouterLink to="/register">Users</RouterLink>
       </nav>
     </header>
 
