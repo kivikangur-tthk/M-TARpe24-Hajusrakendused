@@ -81,7 +81,11 @@ async function saveGame() {
     } catch (err) {
         console.log("catch")
         error.value = "Saving failed"
-        console.error(err.message)
+        if (err instanceof Error) {
+        console.error(err.message);
+        } else {
+        console.error('An unknown error occurred:', err);
+        }
     } finally {
         saving.value = false
         console.log("finally")

@@ -1,9 +1,5 @@
 
 <script setup lang="ts">
-import { ref } from "vue"
-
-import GamesView from "./views/GamesView.vue"
-/*teiste vaadete impordid käivad siia ka*/
 
 </script>
 
