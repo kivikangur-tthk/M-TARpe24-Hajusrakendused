@@ -11,7 +11,7 @@ const UsersController = {
 
         const requiredFields = ['UserName', 'EmailAddress', 'Password', 'PasswordConfirmation'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
-
+        console.log(req.body)
         if (missingFields.length > 0) {
             return res.status(400).send({
                 error: "Missing parameters, please review data",
@@ -34,7 +34,8 @@ const UsersController = {
             PasswordHash: passwordHash
         });
 
-        return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`).sendStatus(201);
+        return res.location(`${Utilities.getBaseURL(req)}/users/${result.id}`)
+        .send({"OK":"OK"}).status(201);
 
     },
     async getAll(req: express.Request, res: express.Response) {

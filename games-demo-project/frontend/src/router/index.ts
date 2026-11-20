@@ -4,6 +4,7 @@ import {createRouter, createWebHistory} from "vue-router"
 
 import GamesView from "../views/GamesView.vue"
 import RegisterView from "../views/RegisterView.vue"
+import UsersView from "../views/UsersView.vue"
 /*teiste vaadete impordid käivad siia ka*/
 const router = createRouter({
   history: createWebHistory(),
@@ -19,8 +20,13 @@ const router = createRouter({
       component: GamesView
     },
     {
-      path: "/register",
+      path: "/users",
       name: "users",
+      component: UsersView
+    },
+    {
+      path: "/register",
+      name: "register",
       component: RegisterView
     }
   ]

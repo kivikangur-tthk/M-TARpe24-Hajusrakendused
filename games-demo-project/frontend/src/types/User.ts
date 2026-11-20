@@ -1,10 +1,20 @@
 export interface UserSummary {
-    id: string
+    id: string 
     UserName: string
     EmailAddress: string
-    UserStatus: string
+    UserStatus: string 
 }
 export interface User extends UserSummary {
+    SignupDate: string
+    UserCollectionID: string | null
+    ReviewListID: string | null
+    ProfileID: string | null
+    CredentialID: string | null
+}
+export interface UserRegister {
+    UserName: string
+    EmailAddress: string
+    UserStatus: string | null
     SignupDate: string
     UserCollectionID: string | null
     ReviewListID: string | null
@@ -13,4 +23,5 @@ export interface User extends UserSummary {
     Password: string
     PasswordConfirmation: string | null 
 }
+
 
