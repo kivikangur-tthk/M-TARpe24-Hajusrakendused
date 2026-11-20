@@ -30,9 +30,9 @@ app.use((req, res, next) => {
         return next();
     }
     const origin = req.get("Origin")
-    if(origin !== frontendURL) {
-        return res.status(403).send({error: "Request origin not allowed"})
-    }
+    // if(origin !== frontendURL) {
+    //     return res.status(403).send({error: "Request origin not allowed"})
+    // }
     next();
 })
 
