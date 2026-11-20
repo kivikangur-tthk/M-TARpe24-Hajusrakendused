@@ -3,6 +3,7 @@ import gamesRoutes from "./gamesRoutes.ts";
 import usersRoutes from "./usersRoutes.ts";
 import userCollectionsRoutes from "./userCollectionsRoutes.ts";
 import categoriesRoutes from "./categoriesRoutes.ts";
+import authRoutes from "./authRoutes.ts"
 
 export default (app: express.Application): void => {
     // Globaalne 500 vastus kõigile allolevatele otspunktidele
@@ -32,4 +33,9 @@ export default (app: express.Application): void => {
         // #swagger.tags = ['Categories']
         next();
     }, categoriesRoutes);
+
+    app.use("/authentication", (req, res, next) => {
+        // #swagger.tags = ['Authentication']
+        next();
+    }, authRoutes);
 };
