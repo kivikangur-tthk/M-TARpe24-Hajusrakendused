@@ -39,6 +39,13 @@ const UsersController = {
 
     },
     async getAll(req: express.Request, res: express.Response) {
+        if (!res.locals.userId) {
+            return res.status(403).send({error:"Access denied"})
+        }
+        const handler = await db.users.findByPk(res.locals.userId)
+        if (handler?.UserStatus !== "admin" || !handler) {
+            return res.status(403).send({error:"Access denied"})
+        } 
         const users = await db.users.findAll();
         console.log("getAll"+users)
         return res.status(200).send(users.map(
@@ -46,6 +53,9 @@ const UsersController = {
         ))
     },
     async getById(req: express.Request, res: express.Response) {
+        if (req.params.id !== res.locals.userId) {
+            return res.status(403).send({error:"Access denied"})
+        }
         const user = await UsersController.getUser(req, res)
         if (!user) {
             return
@@ -55,7 +65,10 @@ const UsersController = {
 
     //update for standards
     async modifyById(req: express.Request, res: express.Response) {
-        // #swagger.tags = ['Users']
+        if (req.params.id !== res.locals.userId) {
+            return res.status(403).send({error:"Access denied"})
+        }
+
         const requiredFields = ['UserName', 'EmailAddress', 'Password', 'PasswordConfirmation'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
         if (missingFields.length > 0) {
@@ -68,14 +81,14 @@ const UsersController = {
         if (!req.params.id) {
             return res.status(400).send({"error":"No id supplied"})
         }
-        console.log("++++++ id is"+req.params.id)
+        //console.log("++++++ id is"+req.params.id)
         const userToBeModified = await UsersController.getUser(req, res) as User
-        console.log("++++++ user is"+userToBeModified)
+        //console.log("++++++ user is"+userToBeModified)
         if (!req.body) {
             return res.status(400).send({"error":"No body was supplied, nothing was changed"})
         }
 
-        console.log("++++++ body: "+req.body)
+        //console.log("++++++ body: "+req.body)
         
         const modifiedUser = {
             UserName: req.body.UserName,
@@ -108,7 +121,7 @@ const UsersController = {
         }        
         userToBeModified.updatedAt = new Date()
 
-        console.log("++++++ modifieduser is: "+userToBeModified)
+        //console.log("++++++ modifieduser is: "+userToBeModified)
         await db.users.update(modifiedUser, {
             where: {
                 id: req.params.id
@@ -117,6 +130,13 @@ const UsersController = {
         return res.location(`${Utilities.getBaseURL(req)}/users/${userToBeModified}`).status(201).send(modifiedUser)
     },
     async deleteById(req: express.Request, res: express.Response) {
+        if (!res.locals.userId) {
+            return res.status(403).send({error:"Access denied"})
+        }
+        const handler = await db.users.findByPk(res.locals.userId)
+        if (handler?.UserStatus !== "admin" || !handler) {
+            return res.status(403).send({error:"Access denied"})
+        } 
         const userToBeDeleted = await UsersController.getUser(req, res)
         if (!userToBeDeleted) {
             return            
