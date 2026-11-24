@@ -8,6 +8,17 @@ export const authReady = ref(false)
 
 export const authenticationsServices = {
     async login(EmailAddress: string, Password: string) {
-        const response = await fetch(API_URL + "")
+        const response = await fetch(API_URL + "/authentication", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({EmailAddress, Password})
+        })
+        console.log("Login response:", response);        
+        if(!response.ok) {
+            throw new Error(`Request has failed, status is: ${response.status}`)
+        }
     }
 }
