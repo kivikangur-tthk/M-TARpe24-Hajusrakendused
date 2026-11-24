@@ -1,4 +1,4 @@
-import type {User, UserSummary, UserRegister, OK} from "../types/User"
+import type {User, UserSummary, UserRegister } from "../types/User"
 
 const API_URL = import.meta.env.VITE_BACKEND_URL
 
