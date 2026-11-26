@@ -14,9 +14,9 @@ const { setUser } = useAuth()
 
 const handleLogin = async () => {
     try {
-        await authenticationsServices.login(email.value, password.value)
+        const user = await authenticationsServices.login(email.value, password.value)
         const redirectPath = (route.query.redirect as string) || "/users"
-        setUser({UserName:"Unknown user", id: "", UserStatus:"",EmailAddress:""})
+        setUser(user)
         router.push(redirectPath)
     } catch (err) {
         if (err instanceof Error) {
