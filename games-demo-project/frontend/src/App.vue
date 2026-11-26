@@ -13,17 +13,20 @@ const { user, logout } = useAuth()
         <a class="navbar-brand text-light ">PlayOrSlay</a>
 
         <!-- validate that user is logged in here, block off any routerlinks that unlogged in user shouldnt have access to -->
+        <div class="navbar-nav">
+          <RouterLink class="nav-link" to="/games">Games</RouterLink><!--  admin access only -->
+          <RouterLink class="nav-link" to="/users">Users</RouterLink><!-- admin has access to /users routerlink -->
+          <!-- user has access to /catalog routerlink which is /games without edit, delete or create -->
+        </div>
 
-        <RouterLink class="nav-link" to="/games">Games</RouterLink><!--  admin access only -->
 
-        <!-- user has access to /catalog routerlink which is /games without edit, delete or create -->
-
-        <RouterLink class="nav-link" to="/users">Users</RouterLink><!-- admin has access to /users routerlink -->
-        <div class="d-flex justify-content-between" v-if="user">
-          <span class="text-primary">Hello, {{ user.UserName }} </span>
+        <div class="ml-auto d-flex align-items-center" v-if="user">
+          <span class="text-primary mr-3">Hello, {{ user.UserName }} </span>
           <button class="btn btn-primary" type="button" @click="logout">Log out</button>
         </div>
-        <RouterLink v-else class="nav-link" to="/register">Sign up</RouterLink><!-- guest only -->        
+        <div class="navbar-nav ml-auto" v-else>
+          <RouterLink class="nav-link" to="/register">Sign up</RouterLink><!-- guest only -->        
+        </div>
       </nav>
     </header>
 
