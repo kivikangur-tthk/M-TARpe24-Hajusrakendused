@@ -1,6 +1,7 @@
 
 <script setup lang="ts">
-
+import { useAuth } from "@/composables/useAuth";
+const { user, logout } = useAuth()
 </script>
 
 <template>
@@ -18,8 +19,11 @@
         <!-- user has access to /catalog routerlink which is /games without edit, delete or create -->
 
         <RouterLink class="nav-link" to="/users">Users</RouterLink><!-- admin has access to /users routerlink -->
-        
-        <RouterLink class="nav-link" to="/register">Sign up</RouterLink><!-- guest only -->        
+        <div class="d-flex justify-content-between" v-if="user">
+          <span class="text-primary">Hello, {{ user.UserName }} </span>
+          <button class="btn btn-primary" type="button" @click="logout">Log out</button>
+        </div>
+        <RouterLink v-else class="nav-link" to="/register">Sign up</RouterLink><!-- guest only -->        
       </nav>
     </header>
 
