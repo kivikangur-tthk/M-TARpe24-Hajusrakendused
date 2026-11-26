@@ -21,7 +21,7 @@ const { user, logout } = useAuth()
 
 
         <div class="ml-auto d-flex align-items-center" v-if="user">
-          <span class="text-primary mr-3">Hello, {{ user.UserName }} </span>
+          <span class="navbar-text text-light mr-3">Hello, {{ user.UserName }} </span>
           <button class="btn btn-primary" type="button" @click="logout">Log out</button>
         </div>
         <div class="navbar-nav ml-auto" v-else>
